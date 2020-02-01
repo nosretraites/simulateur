@@ -13,8 +13,11 @@ jobs:
 
     steps:
       - checkout
-      - run: npm run ci
+      - run: npm ci
       - run: npm run build
       - run: git config user.email "hackons@reformedesretraites.fr"
       - run: git config user.name "Hackons Robot"
+      - add_ssh_keys:
+        fingerprints:
+        - "96:85:54:9d:5a:23:9a:e6:e0:a0:d1:96:91:d9:e1:9b"
       - run: npm run deploy
