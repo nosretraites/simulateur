@@ -12,6 +12,5 @@ jobs:
       with:
         node-version: '12.x'
     - run: npm ci
-    - run: git config user.email "hackons@reformedesretraites.fr"
-    - run: git config user.name "Hackons Robot"
-    - run: npm run deploy
+    - run: npm run build
+    - run: npm run deploy:action
