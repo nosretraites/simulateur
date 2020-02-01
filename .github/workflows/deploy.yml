@@ -1,0 +1,16 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: 8.x
+
+    steps:
+    - run: npm ci
+    - run: npm run deploy
