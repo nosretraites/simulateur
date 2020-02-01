@@ -6,7 +6,7 @@ export default () => (
 
     <ul>
       <li>
-        <Link href="/form">
+        <Link href="form">
           <a>Formulaire</a>
         </Link>
       </li>
