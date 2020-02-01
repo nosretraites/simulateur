@@ -15,6 +15,5 @@ jobs:
     - run: git config user.email "hackons@reformedesretraites.fr"
     - run: git config user.name "Hackons Robot"
     - run: npm run build
-    - run: npm run deploy:action
-      env:
-        USER_GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+    - name: GitHub Pages Deploy
+      uses: maxheld83/ghpages@v0.2.1
