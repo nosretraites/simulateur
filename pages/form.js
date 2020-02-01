@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 
-export default () => {
+import { Context } from "../context";
+import { postSimpleForm } from "../services/api";
+
+import { withProvider } from "../components/Layout";
+
+const SimpleForm = () => {
+  const { setSimpleResult, simpleResult } = useContext(Context);
   const [pending, setPending] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -11,31 +17,15 @@ export default () => {
       proportion: 1
     },
     onSubmit: values => {
-      console.log("submit !!! ! ! !");
       setPending(true);
-      // TODO remove age et modele when new api is ready
-      fetch(`http://127.0.0.1:5000/basic`, {
-      //fetch(`https://destinie.reformedesretraites.fr/basic`, {
-        method: "POST",
-        body: new URLSearchParams({
-          age: 0,
-          modele: "Actuel",
-          ...values
-        }),
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-      })
-        .then(res => res.json())
-        .then(result => {
-          console.log("form submitted !!!");
-          console.log(result);
-          setPending(false);
-        })
-        .catch(err => {
-          console.error(err);
-          setPending(false);
-        });
+      postSimpleForm({
+        age: 0,
+        modele: "Actuel",
+        ...values
+      }).then(result => {
+        setSimpleResult(result);
+        setPending(false);
+      });
     }
   });
 
@@ -112,3 +102,5 @@ export default () => {
     </form>
   );
 };
+
+export default withProvider(SimpleForm);
