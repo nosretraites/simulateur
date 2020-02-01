@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default () => (
   <div>
-    <p>Simulateur des retraites</p>
+    <p>Simulateur des retraites !</p>
 
     <ul>
       <li>
