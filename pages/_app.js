@@ -1,9 +1,9 @@
 import App from "next/app";
 import { Provider } from "../context";
 
-const MyApp = () => (
+const MyApp = (props) => (
   <Provider>
-    <App />
+    <App {...props} />
   </Provider>
 );
 
