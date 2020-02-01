@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default () => (
   <div>
@@ -7,7 +7,7 @@ export default () => (
     <ul>
       <li>
         <Link href="/form">
-        <a>Formulaire</a>
+          <a>Formulaire</a>
         </Link>
       </li>
     </ul>
