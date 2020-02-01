@@ -16,3 +16,5 @@ jobs:
     - run: git config user.name "Hackons Robot"
     - run: npm run build
     - run: npm run deploy:action
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
