@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useFormik } from "formik";
+import Router from "next/router";
 
 import { Context } from "../context";
 import { fetchCareers, postSimpleForm } from "../services/api";
 
-import { withProvider } from "../components/Layout";
-
 const SimpleForm = () => {
-  const { setSimpleResult, simpleResult } = useContext(Context);
+  const { updateData } = useContext(Context);
   const [pending, setPending] = useState(false);
   const [careers, setCareers] = useState({
     carrieres: { SMIC: [1] },
@@ -66,8 +65,10 @@ const SimpleForm = () => {
         modele: "Actuel",
         ...values
       }).then(result => {
-        setSimpleResult(result);
+        console.log(result);
         setPending(false);
+        updateData(result);
+        Router.push("/result");
       });
     }
   });
@@ -225,4 +226,4 @@ const SimpleForm = () => {
   );
 };
 
-export default withProvider(SimpleForm);
+export default SimpleForm;

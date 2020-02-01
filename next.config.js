@@ -8,6 +8,7 @@ module.exports = withCSS({
       '/': { page: '/' },
       '/form': { page: '/form' },
       '/poc': { page: '/poc' },
+      '/result': { page: '/result' }
     }
   }
 })
