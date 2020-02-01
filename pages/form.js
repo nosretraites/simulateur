@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useFormik } from "formik";
 
 export default () => {
@@ -7,31 +7,31 @@ export default () => {
     initialValues: {
       naissance: 1984,
       debut: 36,
-      carriere: 'SMIC',
+      carriere: "SMIC",
       proportion: 1
     },
-    onSubmit: (values) => {
-      console.log('submit !!! ! ! !');
+    onSubmit: values => {
+      console.log("submit !!! ! ! !");
       setPending(true);
       // TODO remove age et modele when new api is ready
       fetch(`https://destinie.reformedesretraites.fr/basic`, {
-        method: 'POST',
+        method: "POST",
         body: new URLSearchParams({
           age: 0,
-          modele: 'Actuel',
+          modele: "Actuel",
           ...values
         }),
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          "Content-Type": "application/x-www-form-urlencoded"
         }
       })
         .then(res => res.json())
-        .then((result) => {
-          console.log('form submitted !!!');
+        .then(result => {
+          console.log("form submitted !!!");
           console.log(result);
           setPending(false);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
           setPending(false);
         });
@@ -82,11 +82,12 @@ export default () => {
             Cas type n°2 du COR (non cadre à carrière sans interruption)
           </option>
           <option value="COR3">
-            Cas type n°3 du COR (non cadre à carrière interrompue par du chômage )
+            Cas type n°3 du COR (non cadre à carrière interrompue par du chômage
+            )
           </option>
           <option value="COR4">
-            Cas type n°4 du COR (non cadre avec une interruption de carrière pour
-            enfant)
+            Cas type n°4 du COR (non cadre avec une interruption de carrière
+            pour enfant)
           </option>
           <option value="PlafondSS">PlafondSS</option>
         </select>
@@ -103,7 +104,9 @@ export default () => {
           value={formik.values.proportion}
         />
       </div>
-      <button type="submit" disabled={pending}>Submit</button>
+      <button type="submit" disabled={pending}>
+        Submit
+      </button>
       {pending && <span>loading</span>}
     </form>
   );

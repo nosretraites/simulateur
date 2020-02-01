@@ -8,7 +8,8 @@
     "build": "NODE_ENV=production next build && NODE_ENV=production next export",
     "deploy": "npm run build && npm run deploy:github",
     "deploy:github": "touch out/.nojekyll && gh-pages -d out --dotfiles",
-    "start": "next start"
+    "start": "next start",
+    "fix": "prettier --write 'pages/**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -22,12 +23,14 @@
   },
   "homepage": "https://github.com/nosretraites/simulateur#readme",
   "dependencies": {
+    "@nivo/line": "^0.61.1",
     "formik": "^2.1.3",
     "next": "^9.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "prettier": "^1.19.1"
   }
 }
