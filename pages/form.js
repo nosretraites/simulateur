@@ -14,7 +14,8 @@ export default () => {
       console.log("submit !!! ! ! !");
       setPending(true);
       // TODO remove age et modele when new api is ready
-      fetch(`https://destinie.reformedesretraites.fr/basic`, {
+      fetch(`http://127.0.0.1:5000/basic`, {
+      //fetch(`https://destinie.reformedesretraites.fr/basic`, {
         method: "POST",
         body: new URLSearchParams({
           age: 0,
