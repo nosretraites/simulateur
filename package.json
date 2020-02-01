@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
+    "build": "NODE_ENV=production next build && NODE_ENV=production next export",
+    "deploy": "npm run build && npm run deploy:github",
+    "deploy:github": "touch out/.nojekyll && gh-pages -d out --dotfiles",
     "start": "next start"
   },
   "repository": {
@@ -23,5 +25,8 @@
     "next": "^9.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
   }
 }
