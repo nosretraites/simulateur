@@ -7,8 +7,6 @@ import { useFormik } from "formik";
 import { Context } from "../context";
 import { fetchCareers, postSimpleForm } from "../services/api";
 
-import { withProvider } from "../components/Layout";
-
 const SimpleForm = () => {
   const [raw, setRaw] = useState(false);
   const [salaryPlotData, setSalaryPlotData] = useState([]);
@@ -34,7 +32,7 @@ const SimpleForm = () => {
   return (
     <div style={{ height: "80vh" }}>
       <h1>TEST</h1>
-            <ResponsiveLine
+      <ResponsiveLine
         data={salaryPlotData}
         enablePoints={false}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -105,4 +103,4 @@ const SimpleForm = () => {
   );
 };
 
-export default withProvider(SimpleForm);
+export default SimpleForm;

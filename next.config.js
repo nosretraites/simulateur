@@ -6,8 +6,8 @@ module.exports = withCSS({
   exportPathMap: function(defaultPathMap) {
     return {
       '/': { page: '/' },
-      '/form': { page: '/form' },
       '/poc': { page: '/poc' },
+      '/result': { page: '/result' }
     }
   }
 })

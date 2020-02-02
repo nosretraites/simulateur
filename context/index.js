@@ -3,12 +3,12 @@ import React, { createContext, useState } from 'react';
 const Context = createContext({});
 
 const Provider = ({ children }) => {
-  const [simpleResult, setSimpleResult] = useState(null);
+  const [simpleResult, updateData] = useState({});
 
   return (
     <Context.Provider value={{
       simpleResult,
-      setSimpleResult
+      updateData
     }}>
       {children}
     </Context.Provider>
