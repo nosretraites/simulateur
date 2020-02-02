@@ -2,12 +2,30 @@ import React, { useContext, useEffect, useState } from "react";
 import * as d3 from 'd3';
 import xlsx from 'xlsx';
 import { ResponsiveLine } from "@nivo/line";
+import { ResponsivePie } from '@nivo/pie'
+
 import { useFormik } from "formik";
 
 import { Context } from "../context";
 import { fetchCareers, postSimpleForm } from "../services/api";
 
 import { withProvider } from "../components/Layout";
+
+const MyResponsivePie = ({ percent }) => (
+    <ResponsivePie
+        data={[
+        {
+          "id": "Montant de la pension en % du dernier salaire",
+          "label": "Montant de la pension en % du dernier salaire",
+          "value": percent,
+        }]}
+        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+        endAngle={Math.round(360 * percent)}
+        colors={{ scheme: 'nivo' }}
+        fit={false}
+    />
+)
+
 
 const ResponsiveLineChart = ({data}) => (
   <ResponsiveLine
@@ -101,9 +119,23 @@ const SimpleForm = () => {
   }, []);
 
   return (
-    <div style={{ height: "80vh" }}>
+    <div style={{ height: "30vh" }}>
+      <style jsx>{`
+          .charts {
+            display: flex;
+            height: 300px;
+            align-items: stretch;
+          }
+          .chart {
+            height: 100%;
+          }
+        `}</style>
       <h1>TEST</h1>
-      <ResponsiveLineChart data={salaryPlotData} />
+        <ResponsiveLineChart data={salaryPlotData} />
+        <div className="charts">
+          <div className="chart"><MyResponsivePie percent={0.65} /></div>
+          <div className="chart"><MyResponsivePie percent={0.55} /></div>
+      </div>
     </div>
   );
 };
