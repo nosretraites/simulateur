@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ResponsiveLine } from "@nivo/line";
 import { useFormik } from "formik";
 import Router from "next/router";
 
@@ -68,161 +67,88 @@ const SimpleForm = () => {
         console.log(result);
         setPending(false);
         updateData(result);
-        // Router.push("/result");
+        Router.push("/result");
       });
     }
   });
 
   return (
-    <div style={{ height: "80vh" }}>
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <label htmlFor="naissance">Année de naissance</label>
-          <input
-            id="naissance"
-            name="naissance"
-            type="number"
-            min="1930"
-            max="2020"
-            step="1"
-            onChange={formik.handleChange}
-            value={formik.values.naissance}
-          />
+    <form className="formulaire" onSubmit={formik.handleSubmit}>
+      <h1 className="formulaire__title">
+        Destinie's Child
+        <span style={{display:'block', fontSize: '1.2em', marginTop: '0.5rem'}}>
+          Le Simulateur de Retraite Ouvert
+        </span>
+      </h1>
+      <div className="formulaire__area">
+        <div className="formulaire__area__personalInfo">
+          <label className="formulaire__label">
+            <span>
+              Année <br />
+              de naissance
+            </span>
+            <input
+              id="naissance"
+              name="naissance"
+              type="number"
+              min="1930"
+              max="2020"
+              step="1"
+              onChange={formik.handleChange}
+              value={formik.values.naissance}
+              className="formulaire__input"
+            />
+          </label>
+          <label className="formulaire__label">
+            Âge <br />
+            de début de carrière
+            <input
+              className="formulaire__input"
+              id="debut"
+              name="debut"
+              type="number"
+              min="12"
+              max="77"
+              step="1"
+              onChange={formik.handleChange}
+              value={formik.values.debut}
+            />
+          </label>
+          <label className="formulaire__label">
+            Salaire brut
+            <br /> de cette année
+            <input
+              className="formulaire__input"
+              id="salary"
+              name="salary"
+              type="number"
+              onChange={formik.handleChange}
+              value={formik.values.salary}
+            />
+          </label>
         </div>
-        <div>
-          <label htmlFor="debut">Âge de début de carrière</label>
-          <input
-            id="debut"
-            name="debut"
-            type="number"
-            min="12"
-            max="77"
-            step="1"
-            onChange={formik.handleChange}
-            value={formik.values.debut}
-          />
-        </div>
-        <div>
-          <label htmlFor="salary">Salaire brut actuel / mois</label>
-          <input
-            id="salary"
-            name="salary"
-            type="number"
-            onChange={formik.handleChange}
-            value={formik.values.salary}
-          />
-        </div>
-        <div>
-          <label htmlFor="carriere">Base du salaire</label>
-          <select
-            name="carriere"
-            value={formik.values.carriere}
-            onChange={formik.handleChange}
-          >
-            <option value="SMIC">SMIC de base</option>
-            <option value="SMPT">Salaire moyen par tête de base</option>
-            <option value="COR1">
-              Cas type n°1 du COR (cadre à carrière sans interruption)
-            </option>
-            <option value="COR2">
-              Cas type n°2 du COR (non cadre à carrière sans interruption)
-            </option>
-            <option value="COR3">
-              Cas type n°3 du COR (non cadre à carrière interrompue par du
-              chômage )
-            </option>
-            <option value="COR4">
-              Cas type n°4 du COR (non cadre avec une interruption de carrière
-              pour enfant)
-            </option>
-            <option value="PlafondSS">PlafondSS</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="proportion">Proportion de la base</label>
-          <input
-            id="proportion"
-            name="proportion"
-            type="number"
-            min="0"
-            step="1"
-            onChange={formik.handleChange}
-            value={formik.values.proportion}
-          />
-        </div>
-        <button type="submit" disabled={pending}>
-          Submit
-        </button>
-        {pending && <span>loading</span>}
-      </form>
+        <div className="formulaire__area__career" style={{ height: '200px' }}>
+          <input type="radio" name="radSize" id="smic" value="SMIC" />
+          <label className="smic image_radio" for="smic"/>
 
-      <ResponsiveLine
-        data={salaryPlotData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-        xScale={{ type: "point" }}
-        yScale={{
-          type: "linear",
-          min: "auto",
-          max: "auto",
-          stacked: true,
-          reverse: false
-        }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          orient: "bottom",
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Âge",
-          legendOffset: 36,
-          legendPosition: "middle"
-        }}
-        axisLeft={{
-          orient: "left",
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Salaire",
-          legendOffset: -40,
-          legendPosition: "middle"
-        }}
-        colors={{ scheme: "nivo" }}
-        pointSize={10}
-        pointColor={{ theme: "background" }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: "serieColor" }}
-        pointLabel="y"
-        pointLabelYOffset={-12}
-        useMesh={true}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: "left-to-right",
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: "circle",
-            symbolBorderColor: "rgba(0, 0, 0, .5)",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemBackground: "rgba(0, 0, 0, .03)",
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
-      />
-    </div>
+          <input type="radio" name="radSize" id="cor1" value="COR1" />
+          <label className="cor1 image_radio" for="cor1" />
+
+          <input type="radio" name="radSize" id="cor2" value="COR2" />
+          <label className="cor2 image_radio" for="cor2" />
+
+          <input type="radio" name="radSize" id="cor3" value="COR3" />
+          <label className="cor3 image_radio" for="cor3" />
+
+          <input type="radio" name="radSize" id="cor4" value="COR4" />
+          <label className="cor4 image_radio" for="cor4" />
+        </div>
+      </div>
+      <button type="submit" className="formulaire__submit" disabled={pending}>
+        Simuler ma retraite >
+      </button>
+      {pending && <span>loading</span>}
+    </form>
   );
 };
 

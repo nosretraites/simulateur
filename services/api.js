@@ -6,7 +6,7 @@ const NEXT_API_BASE = 'http://52.212.241.224:5000';
 export const fetchCareers = async () => {
   const res = await fetch(`${NEXT_API_BASE}/fetch_carrierPaths`);
 
-  return await res.json();
+  return res.json();
 };
 
 export const postSimpleForm = async (values) => {

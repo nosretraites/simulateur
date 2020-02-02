@@ -1,9 +1,14 @@
 import App from "next/app";
 import { Provider } from "../context";
 
+import '../styles/styles.css'
+
 const MyApp = (props) => (
   <Provider>
-    <App {...props} />
+    <div className="wrapper">
+      <header><a href="">A propos</a></header>
+      <App {...props} />
+    </div>
   </Provider>
 );
 

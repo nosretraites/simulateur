@@ -1,0 +1,178 @@
+body {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(231, 231, 231);
+  font-family: 'Arial Rounded MT', 'Comic Sans MS', Arial, Helvetica;
+}
+
+.wrapper {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+  background: rgb(126, 198, 244);
+  background: linear-gradient(183deg, rgba(126, 198, 244, 1) 0%, rgba(255, 141, 165, 1) 100%);
+}
+
+header {
+  height: 2rem;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100vh;
+  text-align: right;
+  margin: 1.5rem;
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.formulaire__title {
+  text-align: center;
+}
+
+.formulaire__area {
+  background-color: whitesmoke;
+  box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.3);
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+.formulaire__area:hover {
+  background-color: white;
+  transform: scale(1.02);
+}
+
+.formulaire__area__personalInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.formulaire__area__career {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid rgb(221, 221, 221);
+  justify-content: center;
+}
+
+.formulaire__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 18vw;
+  height: 200px;
+  text-align: center;
+}
+
+.formulaire__input {
+  box-sizing: content-box;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 1rem 1.5rem;
+  width: 4rem;
+  font-size: 1.3rem;
+  border: none;
+  border-bottom: 3px solid gray;
+  background-color: rgb(241, 241, 241);
+  color: rgb(49, 49, 49);
+  color: #0a78be;
+}
+
+.formulaire__input:focus {
+  border-bottom: 3px solid rgb(13, 157, 214);
+  background-color: rgb(238, 249, 255);
+}
+
+.formulaire__area__career label {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 1rem;
+  width: 150px;
+}
+
+.formulaire__area__career input {
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.formulaire__area__career input:active +.image_radio {
+  opacity: .9;
+}
+
+.formulaire__area__career input:checked +.image_radio {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+}
+
+.formulaire__submit {
+  cursor: pointer;
+  background-color: #0d8cdb;
+  border: none;
+  border-radius: 0.8rem;
+  box-shadow: 0px 4px 0 rgba(255,255,255,0.5);
+  color: white;
+  font-size: 1.3rem;
+  height: 4rem;
+  margin-top: 3.5rem;
+  width: 15rem;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+.formulaire__submit:hover {
+  background-color: rgb(12, 100, 182);
+  transform: scale(1.02);
+}
+
+.smic {
+  background-image: url('/career0.svg');
+}
+
+.cor1 {
+  background-image: url('/career1.svg');
+}
+
+.cor2 {
+  background-image: url('/career2.svg');
+}
+
+.cor3 {
+  background-image: url('/career3.svg');
+}
+
+.cor4 {
+  background-image: url('/career4.svg');
+}
+
+.image_radio {
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+  -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+  -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+  filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+.image_radio:hover {
+  -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+  -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+  filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
