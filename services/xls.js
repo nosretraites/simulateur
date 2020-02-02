@@ -2,7 +2,6 @@ import XLSX from "xlsx";
 
 const SHEET_NAMES = ["emp", "retraites"];
 
-
 export const parseXlsFile = (arrayBuffer) => {
   const { Sheets } = XLSX.read(new Uint8Array(arrayBuffer), {type:"array"});
 

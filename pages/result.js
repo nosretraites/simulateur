@@ -3,13 +3,11 @@ import React, { useContext } from "react";
 import { Context } from "../context";
 
 const Result = () => {
-  const foo = useContext(Context);
-
-  console.log("result => ", foo);
+  const { simpleResult: { emp } } = useContext(Context);
 
   return (
     <div>
-      Result :<div>{JSON.stringify(foo)}</div>
+      Result :<div>{JSON.stringify(emp)}</div>
     </div>
   );
 };
