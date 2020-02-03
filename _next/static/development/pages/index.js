@@ -82660,7 +82660,7 @@ var SimpleForm = function SimpleForm() {
     },
     __self: this
   }, "Acc\xE9dez enfin \xE0 l'impact de la r\xE9forme sur votre retraite", __jsx("img", {
-    src: "/logo_collectif.png",
+    src: "logo_collectif.png",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 93
