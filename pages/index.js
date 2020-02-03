@@ -149,37 +149,43 @@ const SimpleForm = () => {
           { pending && timerMessage && <div>{timerMessage}</div> }
         </div>
         { result && (
-          <div className="row results">
-            <div className="result">
-              <span>La personne avec la même carrière</span>
-              <span>né en <span className="semi important">1960</span></span>
-              <span>peut partir à la retraite à {result.age} ans</span>
-              <div className="focus">
-                Sa pension représente
-                <span className="important">{result.past} %</span>
-                de son dernier salaire
+          <div>
+            <div className="row results">
+              <div className="result">
+                <span>La personne avec la même carrière</span>
+                <span>né en <span className="semi important">1960</span></span>
+                <span>peut partir à la retraite à {result.age} ans</span>
+                <div className="focus">
+                  Sa pension représente
+                  <span className="important">{result.past} %</span>
+                  de son dernier salaire
+                </div>
+              </div>
+              <div className="result">
+                <span>Vous</span>
+                <span>né en <span className="semi important">1980</span></span>
+                <span>en partant à la retraite à {result.age} ans</span>
+                <div className="focus">
+                  Votre pension représente
+                  <span className="important">{result.current} %</span>
+                  de son dernier salaire
+                </div>
+              </div>
+              <div className="result">
+                <span>Pour conserver</span>
+                <span>une pension</span>
+                <span>suffisante</span>
+                <span>pour vivre</span>
+                <div className="focus">
+                  vous devez partir
+                  <span className="important">{result.delay} ans</span>
+                  plus tard.
+                </div>
               </div>
             </div>
-            <div className="result">
-              <span>Vous</span>
-              <span>né en <span className="semi important">1980</span></span>
-              <span>en partant à la retraite à {result.age} ans</span>
-              <div className="focus">
-                Votre pension représente
-                <span className="important">{result.current} %</span>
-                de son dernier salaire
-              </div>
-            </div>
-            <div className="result">
-              <span>Pour conserver</span>
-              <span>une pension</span>
-              <span>suffisante</span>
-              <span>pour vivre</span>
-              <div className="focus">
-                vous devez partir
-                <span className="important">{result.delay} ans</span>
-                plus tard.
-              </div>
+            <div className="row">
+              Vous souhaitez nous contacter&nbsp;?
+              Nous sommes joingnable par email à l'adresse suivante <a href="mailto:contact@reformedesretraites.fr?subject=Super%20simulateur%20!">contact@reformedesretraites.fr</a>.
             </div>
           </div>)
         }
