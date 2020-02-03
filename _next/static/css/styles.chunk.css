@@ -1,0 +1,140 @@
+body, a {
+  max-width: 70em;
+  margin: 0em auto;
+  font-family: Arial, Helvetica;
+  color: #505d75;
+}
+
+header {
+  margin: 0.5em;
+}
+
+header h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  height: 120px;
+}
+
+form {
+  font-size: 200%;
+}
+
+label {
+  color: #21dca4;
+  font-weight: bold;
+}
+
+.row {
+  margin: 0.5em;
+}
+
+.inputs label {
+  margin: 0.2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 700px) {
+  .inputs {
+    flex-direction: column;
+  }
+}
+.row.submit {
+  display: flex;
+}
+.row.submit div {
+  margin: 0 1em;
+}
+
+.carrieres label {
+  color: #505d75;
+  font-size: 0.7em;
+  font-weight: normal;
+}
+
+label .carriere {
+  flex-direction: row;
+  font-size: 100%;
+}
+
+input {
+  font-size: 1em;
+  border: none;
+  text-align: center;
+  border-bottom: dashed #505d75 1px;
+  color: #505d75;
+}
+
+button {
+  border: none;
+  background-color: #ffcc4e;
+  padding: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.results {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  max-width: 30%;
+}
+
+@media (max-width: 700px) {
+  .results {
+    display: block;
+  }
+  .result {
+    max-width: 100%;
+    border: solid #acb8ce 1px;
+    border-radius: 10px;
+    padding: 0.4em;
+    margin: 0.3em;
+  }
+}
+
+.result span {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.important {
+  font-size: 300%;
+}
+
+.semi.important {
+  font-size: 150%;
+}
+
+.focus {
+  margin: 1em 0em;
+}
+
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+/*# sourceMappingURL=styles.chunk.css.map*/
