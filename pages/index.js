@@ -1,92 +1,103 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import Router from "next/router";
+import * as d3 from 'd3';
+import xlsx from 'xlsx';
+
+import '../styles/restyle.css'
 
 import { Context } from "../context";
 import { fetchCareers, postSimpleForm } from "../services/api";
 
+const carrieres = [
+  { id: 'SMIC', label: 'SMIC' },
+  { id: 'COR1', label: 'Cadre à carrière sans interruption' },
+  { id: 'COR2', label: 'Non cadre à carrière sans interruption' },
+  { id: 'COR3', label: 'Non cadre à carrière interrompue par du chômage' },
+  { id: 'COR4', label: 'Non cadre avec une interruption de carrière pour enfant' },
+]
+
 const SimpleForm = () => {
   const { updateData } = useContext(Context);
   const [pending, setPending] = useState(false);
-  const [careers, setCareers] = useState({
-    carrieres: { SMIC: [1] },
-    smic_brut: 14000
-  });
   const [start, setStart] = useState(22);
-  const [salary, setSalary] = useState(1400);
-  const [career, setCareer] = useState("SMIC");
-  const [salaryPlotData, setSalaryPlotData] = useState([]);
-  const [salaryData, setSalaryData] = useState([]);
+  const [career, setCareer] = useState('COR2');
+  const [timerMessage, setTimerMessage] = useState(false);
+  const [result, setResult] = useState(false);
 
-  useEffect(() => {
-    fetchCareers().then(careers => setCareers(careers));
-  }, []);
-
-  useEffect(() => {
-    let rawData = Array(start + 1).fill(0);
-    careers.carrieres[career].forEach(coef => {
-      rawData.push(coef * salary);
-    });
-    rawData = [
-      ...rawData,
-      ...Array(98 - rawData.length).fill(rawData[rawData.length - 1])
-    ];
-
-    const data = rawData.map((v, i) => ({ x: i, y: v }));
-
-    setSalaryPlotData([{ id: career, data }]);
-
-    const smic = careers.smic_brut / 12;
-    setSalaryData(rawData.map(v => v / smic));
-  }, [career, careers, salary, start]);
-
-  useEffect(() => {
-    // TODO: to send to the API
-    console.log(salaryData);
-  }, [salaryData]);
+  // useEffect(() => {
+  //   setResult({
+  //     past: 75,
+  //     current: 60,
+  //     age: 63,
+  //     delay: 3
+  //   })
+  // }, [])
 
   const formik = useFormik({
     initialValues: {
       naissance: 1984,
       debut: start,
-      salary: salary,
       carriere: career,
       proportion: 1
     },
     onSubmit: values => {
-      setStart(values.debut);
-      setSalary(values.salary);
-      setCareer(values.carriere);
+      setPending(true)
+      setTimerMessage('💣 tic. tac. tic. tac. (10 secondes environ pour le moment 😁)')
 
-      setPending(true);
-      postSimpleForm({
-        age: 0,
-        modele: "Actuel",
-        ...values
-      }).then(result => {
-        console.log(result);
-        setPending(false);
-        updateData(result);
-        Router.push("/result");
-      });
+      postSimpleForm(values)
+      .then(blob => {
+          const raw = xlsx.read(new Uint8Array(blob), {type:"array"})
+          const data = xlsx.utils.sheet_to_csv(raw.Sheets.fullset)
+          const json = d3.csvParse(data)
+
+          let past, age, current, delay
+          json.forEach(function(r) {
+            const rAge = parseInt(r.age)
+            const rNaissance = parseInt(r.anaiss)
+            if (rNaissance == 1960 && r.scenario == 'actuel') {
+              age = rAge
+              past = Math.round(parseFloat(r.TR_brut)*100)
+            }
+
+            if (rAge == age && r.scenario == 'reforme') {
+              current = Math.round(parseFloat(r.TR_brut)*100)
+            }
+
+            if (current && !delay && r.scenario == 'reforme') {
+              let test = Math.round(parseFloat(r.TR_brut)*100)
+              if (test >= past) {
+                delay = rAge - age
+              }
+            }
+          })
+
+          setResult({
+            past,
+            current,
+            delay,
+            age,
+          })
+      }).finally(() => {
+        setPending(false)
+        setTimerMessage(false)
+      })
     }
   });
 
   return (
-    <form className="formulaire" onSubmit={formik.handleSubmit}>
-      <h1 className="formulaire__title">
-        Destinie's Child
-        <span style={{display:'block', fontSize: '1.2em', marginTop: '0.5rem'}}>
-          Le Simulateur de Retraite Ouvert
-        </span>
-      </h1>
-      <div className="formulaire__area">
-        <div className="formulaire__area__personalInfo">
-          <label className="formulaire__label">
-            <span>
-              Année <br />
-              de naissance
-            </span>
+    <div>
+      <header>
+        <h1>
+          Accédez enfin à l'impact de la réforme sur votre retraite
+          <img src="/logo_collectif.png" />
+        </h1>
+      </header>
+
+      <form onSubmit={formik.handleSubmit}>
+        <div className="inputs row">
+          <label>
+            Année de naissance
             <input
               id="naissance"
               name="naissance"
@@ -96,14 +107,11 @@ const SimpleForm = () => {
               step="1"
               onChange={formik.handleChange}
               value={formik.values.naissance}
-              className="formulaire__input"
             />
           </label>
-          <label className="formulaire__label">
-            Âge <br />
-            de début de carrière
+          <label>
+            Âge de début de carrière
             <input
-              className="formulaire__input"
               id="debut"
               name="debut"
               type="number"
@@ -114,41 +122,69 @@ const SimpleForm = () => {
               value={formik.values.debut}
             />
           </label>
-          <label className="formulaire__label">
-            Salaire brut
-            <br /> de cette année
-            <input
-              className="formulaire__input"
-              id="salary"
-              name="salary"
-              type="number"
-              onChange={formik.handleChange}
-              value={formik.values.salary}
-            />
-          </label>
         </div>
-        <div className="formulaire__area__career" style={{ height: '200px' }}>
-          <input type="radio" name="radSize" id="smic" value="SMIC" />
-          <label className="smic image_radio" for="smic"/>
-
-          <input type="radio" name="radSize" id="cor1" value="COR1" />
-          <label className="cor1 image_radio" for="cor1" />
-
-          <input type="radio" name="radSize" id="cor2" value="COR2" />
-          <label className="cor2 image_radio" for="cor2" />
-
-          <input type="radio" name="radSize" id="cor3" value="COR3" />
-          <label className="cor3 image_radio" for="cor3" />
-
-          <input type="radio" name="radSize" id="cor4" value="COR4" />
-          <label className="cor4 image_radio" for="cor4" />
+        <div className="row">
+          <label>Carrière</label>
+          <div className="carrieres">
+            { carrieres.map(p => (
+              <div className="carriere" key={p.id}>
+                <label>
+                <input type="radio"
+                  onChange={formik.handleChange}
+                  value={formik.values.carriere}
+                  name="carriere"
+                  value={p.id}
+                  checked={formik.values.carriere === p.id} />
+                  {p.label}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <button type="submit" className="formulaire__submit" disabled={pending}>
-        Simuler ma retraite >
-      </button>
-      {pending && <span>loading</span>}
-    </form>
+        <div className="row submit">
+          <button type="submit" disabled={pending}>
+            Accéder au carnage
+          </button>
+
+          { pending && timerMessage && <div>{timerMessage}</div> }
+        </div>
+        { result && (
+          <div className="row results">
+            <div className="result">
+              <span>La personne avec la même carrière</span>
+              <span>né en <span className="semi important">1960</span></span>
+              <span>peut partir à la retraite à {result.age} ans</span>
+              <div className="focus">
+                Sa pension représente
+                <span className="important">{result.past} %</span>
+                de son dernier salaire
+              </div>
+            </div>
+            <div className="result">
+              <span>Vous</span>
+              <span>né en <span className="semi important">1980</span></span>
+              <span>en partant à la retraite à {result.age} ans</span>
+              <div className="focus">
+                Votre pension représente
+                <span className="important">{result.current} %</span>
+                de son dernier salaire
+              </div>
+            </div>
+            <div className="result">
+              <span>Pour conserver</span>
+              <span>une pension</span>
+              <span>suffisante</span>
+              <span>pour vivre</span>
+              <div className="focus">
+                vous devez partir
+                <span className="important">{result.delay} ans</span>
+                plus tard.
+              </div>
+            </div>
+          </div>)
+        }
+      </form>
+    </div>
   );
 };
 

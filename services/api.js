@@ -10,7 +10,7 @@ export const fetchCareers = async () => {
 };
 
 export const postSimpleForm = async (values) => {
-  const res = await fetch(`${API_BASE}/basic`, {
+  const res = await fetch(`${API_BASE}/multi`, {
     method: "POST",
     body: new URLSearchParams(values),
     headers: {
@@ -19,5 +19,5 @@ export const postSimpleForm = async (values) => {
   })
   const blob = await res.arrayBuffer();
 
-  return parseXlsFile(blob);
+  return blob
 };
