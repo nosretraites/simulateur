@@ -90,7 +90,7 @@ const SimpleForm = () => {
       <header>
         <h1>
           Accédez enfin à l'impact de la réforme sur votre retraite
-          <img src="/logo_collectif.png" />
+          <img src="logo_collectif.png" />
         </h1>
       </header>
 
