@@ -163,7 +163,7 @@ const SimpleForm = () => {
               </div>
               <div className="result">
                 <span>Vous</span>
-                <span>né en <span className="semi important">1980</span></span>
+                <span>né en <span className="semi important">{formik.values.naissance}</span></span>
                 <span>en partant à la retraite à {result.age} ans</span>
                 <div className="focus">
                   Votre pension représente
