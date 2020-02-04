@@ -168,7 +168,7 @@ const SimpleForm = () => {
                 <div className="focus">
                   Votre pension représente
                   <span className="important">{result.current} %</span>
-                  de son dernier salaire
+                  de votre dernier salaire
                 </div>
               </div>
               <div className="result">
