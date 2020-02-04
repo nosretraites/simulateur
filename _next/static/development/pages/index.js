@@ -82580,16 +82580,16 @@ var SimpleForm = function SimpleForm() {
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(false),
       result = _useState5[0],
-      setResult = _useState5[1]; // useEffect(() => {
-  //   setResult({
-  //     past: 75,
-  //     current: 60,
-  //     age: 63,
-  //     delay: 3
-  //   })
-  // }, [])
+      setResult = _useState5[1];
 
-
+  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    setResult({
+      past: 75,
+      current: 60,
+      age: 63,
+      delay: 3
+    });
+  }, []);
   var formik = Object(formik__WEBPACK_IMPORTED_MODULE_4__["useFormik"])({
     initialValues: {
       naissance: 1984,
@@ -82872,7 +82872,7 @@ var SimpleForm = function SimpleForm() {
       lineNumber: 166
     },
     __self: this
-  }, "1980")), __jsx("span", {
+  }, formik.values.naissance)), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 167
