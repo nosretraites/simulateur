@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 // import Router from 'next/router';
 
 import { Context } from "../components/context";
 import Pie from "../components/pie";
+import SocialIcon from "../components/socialIcon";
 
 const BASE_SHARE_URL = 'https://nosretraites.github.io/simulateur';
 const SHARE_TITLE = 'Ma simulation de retraite';
@@ -88,13 +89,13 @@ const Result = () => {
           url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
           quote={SHARE_TITLE}
         >
-          <FacebookIcon size={50} round />
+          <SocialIcon name="facebook" />
         </FacebookShareButton>
         <TwitterShareButton
           url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
           quote={SHARE_TITLE}
         >
-          <TwitterIcon size={50} round />
+          <SocialIcon name="twitter" />
         </TwitterShareButton>
       </div>
     </div>
