@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import xlsx from 'xlsx';
-import { csvParse } from 'd3';
 
 const API_BASE = 'https://destinie.reformedesretraites.fr';
 
@@ -18,8 +17,7 @@ async function postSimpleForm(values) {
   const blob = await res.arrayBuffer();
 
   const raw = xlsx.read(new Uint8Array(blob), {type:"array"})
-  const data = xlsx.utils.sheet_to_csv(raw.Sheets.fullset)
-  const json = csvParse(data)
+  const json = xlsx.utils.sheet_to_json(raw.Sheets.fullset)
 
   let past, age, current, delay
   json.forEach(function(r) {

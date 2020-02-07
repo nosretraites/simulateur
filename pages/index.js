@@ -32,7 +32,7 @@ const SimpleForm = () => {
   const formik = useFormik({
     initialValues: {
       naissance: result.naissance || 1984,
-      debut: result.debut || 22,
+      debut: result.debut || 20,
       carriere: result.carriere || "COR2",
       remuneration: result.remuneration || 100
     },
@@ -101,7 +101,7 @@ const SimpleForm = () => {
         icon="euro"
         type="number"
         min="1"
-        step="10"
+        step="1"
         width="250px"
         onChange={formik.handleChange}
         value={formik.values.remuneration}
@@ -116,7 +116,7 @@ const SimpleForm = () => {
       <div className="submit-wrapper">
         <button className="submit" type="submit" disabled={pending}>
           {!pending && 'Accéder au carnage'}
-          {pending && <FA name="spinner" spin={true} />}
+          {pending && <FA name="spinner" size="lg" spin={true} />}
         </button>
 
         {pending && timerMessage && <div>{timerMessage}</div>}

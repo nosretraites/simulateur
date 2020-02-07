@@ -6,10 +6,11 @@ import { Context } from "../components/context";
 import Pie from "../components/pie";
 import SocialIcon from "../components/socialIcon";
 
-const SEO_TITLE = 'Resultat du simulateur de retraite';
+const SEO_TITLE = 'Resultats du simulateur de retraite';
 const BASE_SOCIAL_URL = 'https://nosretraites.github.io/simulateur';
-const SOCIAL_TITLE = 'Voici ce que je toucherais comme retraite avec la reforme macron';
-const SOCIAL_DESCRIPTION = '';
+const SOCIAL_TITLE = 'Voici ce que je toucherai comme retraite avec la reforme macron';
+const SOCIAL_DESCRIPTION = 'Simulateur de retraite du collectif nos retraites';
+const SOCIAL_IMAGE = `${BASE_SOCIAL_URL}/logo_collectif.png`;
 
 const Result = () => {
   const { result } = useContext(Context);
@@ -44,13 +45,11 @@ const Result = () => {
     <div>
       <Head>
         <title>{SEO_TITLE}</title>
-        {/* <meta property="og:title" content="" /> */}
         <meta property="og:type" content="article" />
-        {/* <meta property="og:url" content="" /> */}
         <meta property="og:description" content={SOCIAL_DESCRIPTION} />
+        <meta property="og:image" content={SOCIAL_IMAGE} />
 
         <meta name="twitter:card" content="summary" />
-        {/* <meta name="twitter:title" content="" /> */}
         <meta name="twitter:description" content={SOCIAL_DESCRIPTION} />
       </Head>
       <div className="results">

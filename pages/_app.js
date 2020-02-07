@@ -21,7 +21,7 @@ const MyApp = props => (
       <meta name="application-name" content={SEO_APP_NAME} />
     </Head>
     <header>
-      <img src="logo_collectif.png" />
+      <img src="logo_collectif.png" alt="nos retraites logo" />
       <div>
         <h1>Réforme des retraites</h1>
         <h2>Quel impact pour moi ?</h2>
