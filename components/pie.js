@@ -1,13 +1,10 @@
 import { Pie } from "@nivo/pie";
-import { useEffect, useState } from "react";
+
+import useIsMobile from '../hooks/useIsMobile';
 
 const PieChart = ({ data, label }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 700px)").matches)
-  }, [isMobile]);
-
+  const isMobile = useIsMobile();
+  
   return (
     <div className="chart-row">
       <Pie

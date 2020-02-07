@@ -49,7 +49,7 @@ const Context = createContext({});
 
 const Provider = ({ children, initialState }) => {
   const [result, setResult] = useState(initialState);
-
+  
   useEffect(() => {
     initialState && setResult(initialState);
   }, [initialState])

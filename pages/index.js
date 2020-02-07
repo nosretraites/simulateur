@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useFormik } from "formik";
 import Router from "next/router";
 import FA from 'react-fontawesome';
+import Head from "next/head";
 
+import usePrevious from '../hooks/usePrevious';
 import { Context } from "../components/context";
 import Input from '../components/input';
 import Select from '../components/select';
-import Head from "next/head";
 
 const SEO_DESCRIPTION = 'Un super simulateur de retraites';
 const SEO_TITLE = 'Simulateur de retraite';
@@ -26,13 +27,14 @@ const SimpleForm = () => {
   const { postSimpleForm, result, setResult } = useContext(Context);
   const [pending, setPending] = useState(false);
   const [timerMessage, setTimerMessage] = useState(false);
+  const previousResult = usePrevious(result);
 
   const formik = useFormik({
     initialValues: {
       naissance: result.naissance || 1984,
       debut: result.debut || 22,
       carriere: result.carriere || "COR2",
-      remuneration: result.remuneration || 0
+      remuneration: result.remuneration || 100
     },
     onSubmit: values => {
       setPending(true);
@@ -55,6 +57,17 @@ const SimpleForm = () => {
         });
     }
   });
+
+  useEffect(() => {
+    if (!!previousResult && !Object.keys(previousResult).length && Object.keys(result).length) {
+      formik.setValues({
+        carriere: result.carriere,
+        debut: result.debut,
+        naissance: result.naissance,
+        remuneration: result.remuneration
+      })
+    }
+  }, [previousResult, result]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
