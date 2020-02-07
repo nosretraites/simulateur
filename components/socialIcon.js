@@ -3,7 +3,7 @@ import FA from 'react-fontawesome';
 
 const SocialIcon = (props) => (
   <div className="social-icon-wrapper">
-    <FA className="social-icon" size={50} {...props} />
+    <FA className="social-icon" {...props} />
   </div>
 );
 

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
-// import Router from 'next/router';
 
 import { Context } from "../components/context";
 import Pie from "../components/pie";
