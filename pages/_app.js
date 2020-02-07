@@ -6,11 +6,19 @@ import { Provider } from "../components/context";
 import "../styles/index.css";
 import "../styles/result.css";
 
+const SEO_AUTHOR = 'Nos retraites, collectif citoyen';
+const SEO_KEYWORDS = 'simulateur,retraite,macron';
+const SEO_APP_NAME = 'Simulateur de retraite';
+
 const MyApp = props => (
   <Provider initialState={props.router.query}>
     <Head>
       <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" /> 
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+      <meta name="keywords" content={SEO_KEYWORDS} />
+      <meta name="author" content={SEO_AUTHOR} />
+      <meta name="application-name" content={SEO_APP_NAME} />
     </Head>
     <header>
       <img src="logo_collectif.png" />

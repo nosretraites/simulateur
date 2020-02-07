@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import Head from "next/head";
 
 import { Context } from "../components/context";
 import Pie from "../components/pie";
 import SocialIcon from "../components/socialIcon";
 
-const BASE_SHARE_URL = 'https://nosretraites.github.io/simulateur';
-const SHARE_TITLE = 'Ma simulation de retraite';
+const SEO_TITLE = 'Resultat du simulateur de retraite';
+const BASE_SOCIAL_URL = 'https://nosretraites.github.io/simulateur';
+const SOCIAL_TITLE = 'Voici ce que je toucherais comme retraite avec la reforme macron';
+const SOCIAL_DESCRIPTION = '';
 
 const Result = () => {
   const { result } = useContext(Context);
@@ -39,6 +42,17 @@ const Result = () => {
 
   return (
     <div>
+      <Head>
+        <title>{SEO_TITLE}</title>
+        {/* <meta property="og:title" content="" /> */}
+        <meta property="og:type" content="article" />
+        {/* <meta property="og:url" content="" /> */}
+        <meta property="og:description" content={SOCIAL_DESCRIPTION} />
+
+        <meta name="twitter:card" content="summary" />
+        {/* <meta name="twitter:title" content="" /> */}
+        <meta name="twitter:description" content={SOCIAL_DESCRIPTION} />
+      </Head>
       <div className="results">
         <div className="result">
           <div>
@@ -86,14 +100,14 @@ const Result = () => {
         </span>
         <div className="social-buttons">
           <FacebookShareButton
-            url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
-            quote={SHARE_TITLE}
+            url={BASE_SOCIAL_URL + '?' + new URLSearchParams(result)}
+            quote={SOCIAL_TITLE}
           >
             <SocialIcon name="facebook" />
           </FacebookShareButton>
           <TwitterShareButton
-            url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
-            quote={SHARE_TITLE}
+            url={BASE_SOCIAL_URL + '?' + new URLSearchParams(result)}
+            quote={SOCIAL_TITLE}
           >
             <SocialIcon name="twitter" />
           </TwitterShareButton>

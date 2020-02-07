@@ -6,6 +6,10 @@ import FA from 'react-fontawesome';
 import { Context } from "../components/context";
 import Input from '../components/input';
 import Select from '../components/select';
+import Head from "next/head";
+
+const SEO_DESCRIPTION = 'Un super simulateur de retraites';
+const SEO_TITLE = 'Simulateur de retraite';
 
 const carrieres = [
   { value: "SMIC", label: "SMIC" },
@@ -17,6 +21,7 @@ const carrieres = [
     label: "Non cadre avec une interruption de carrière pour enfant"
   }
 ];
+
 
 const SimpleForm = () => {
   const { postSimpleForm, result, setResult } = useContext(Context);
@@ -54,6 +59,10 @@ const SimpleForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      <Head>
+        <meta name="description" content={SEO_DESCRIPTION} />
+        <title>{SEO_TITLE}</title>
+      </Head>
       <Input
         label="Année de naissance"
         name="naissance"
