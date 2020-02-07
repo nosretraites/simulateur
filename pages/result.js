@@ -85,13 +85,13 @@ const Result = () => {
           Partagez les conséquences de la réforme des retraites :
         </span>
         <FacebookShareButton
-          url={BASE_SHARE_URL}
+          url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
           quote={SHARE_TITLE}
         >
           <FacebookIcon size={50} round />
         </FacebookShareButton>
         <TwitterShareButton
-          url={BASE_SHARE_URL}
+          url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
           quote={SHARE_TITLE}
         >
           <TwitterIcon size={50} round />

@@ -4,29 +4,69 @@ form {
   font-size: 200%;
 }
 
-label {
-  color: var(--primary-color);
-  font-weight: bold;
+.input-wrapper {
+  display: flex;
+  margin-bottom: 30px;
 }
 
-.inputs label {
-  margin: 0.2em;
+.input-label {
+  text-align: right;
+  display: inline-block;
+  width: 50%;
+  color: var(--light-color);
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.inputs {
-  display: flex;
-  justify-content: space-between;
+.input, .select {
+  width: 50%;
+  margin-left: 30px;
+  position: relative;
 }
 
-.row.submit {
+.input input {
+  background: 0;
+  border: 0;
+  outline: none;
+  width: 80vw;
+  max-width: 400px;
+  font-size: 1.5em;
+}
+
+.input input:focus + .line:after {
+  transform: scaleX(1);
+}
+
+.input .line {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: -8px;
+  background: #bdc3c7;
+}
+
+.input .line:after {
+  content: " ";
+  position: absolute;
+  float: right;
+  width: 100%;
+  height: 3px;
+  
+  transform: scalex(0);
+  transition: transform 0.3s ease;
+  
+  background: #1abc9c;
+}
+
+.row.submit-wrapper {
   display: flex;
   flex-direction: column;
   margin-top: 70px;
 }
-.row.submit div {
+.row.submit-wrapper div {
   margin: 0 1em;
+  text-align: center;
 }
 
 .carrieres label {
@@ -40,15 +80,7 @@ label .carriere {
   font-size: 100%;
 }
 
-input {
-  font-size: 1em;
-  border: none;
-  text-align: center;
-  border-bottom: dashed #505d75 1px;
-  color: #505d75;
-}
-
-button {
+.submit {
   border: none;
   background-color: var(--primary-color);
   color: white;
@@ -58,6 +90,7 @@ button {
   border-radius: 5px;
   align-self: center;
   cursor: pointer;
+  width: 300px;
 }
 
 /* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
@@ -73,8 +106,89 @@ input[type=number] {
   -moz-appearance:textfield;
 }
 
-@media (max-width: 700px) {
-  .inputs {
-    flex-direction: column;
-  }
+
+
+.select {
+	position: relative;
+	width: 350px;
+}
+
+.select-text {
+	position: relative;
+	background-color: transparent;
+	width: 350px;
+	padding: 10px 10px 10px 0;
+	font-size: 18px;
+	border-radius: 0;
+	border: none;
+	border-bottom: 3px solid rgba(0,0,0, 0.12);
+}
+
+/* Remove focus */
+.select-text:focus {
+	outline: none;
+	border-bottom: 3px solid rgba(0,0,0, 0);
+}
+
+	/* Use custom arrow */
+.select .select-text {
+	appearance: none;
+	-webkit-appearance:none
+}
+
+.select:after {
+	position: absolute;
+	top: 18px;
+	right: 10px;
+	/* Styling the down arrow */
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid rgba(0, 0, 0, 0.12);
+	pointer-events: none;
+}
+
+
+/* BOTTOM BARS ================================= */
+.select-bar {
+	position: relative;
+	display: block;
+	width: 350px;
+}
+
+.select-bar:before, .select-bar:after {
+	content: '';
+	height: 3px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: var(--primary-color);
+	transition: 0.2s ease all;
+}
+
+.select-bar:before {
+	left: 50%;
+}
+
+.select-bar:after {
+	right: 50%;
+}
+
+/* active state */
+.select-text:focus ~ .select-bar:before, .select-text:focus ~ .select-bar:after {
+	width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.select-highlight {
+	position: absolute;
+	height: 60%;
+	width: 100px;
+	top: 25%;
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
 }

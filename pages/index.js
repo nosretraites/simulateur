@@ -1,16 +1,19 @@
 import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import Router from "next/router";
+import FA from 'react-fontawesome';
 
 import { Context } from "../components/context";
+import Input from '../components/input';
+import Select from '../components/select';
 
 const carrieres = [
-  { id: "SMIC", label: "SMIC" },
-  { id: "COR1", label: "Cadre à carrière sans interruption" },
-  { id: "COR2", label: "Non cadre à carrière sans interruption" },
-  { id: "COR3", label: "Non cadre à carrière interrompue par du chômage" },
+  { value: "SMIC", label: "SMIC" },
+  { value: "COR1", label: "Cadre à carrière sans interruption" },
+  { value: "COR2", label: "Non cadre à carrière sans interruption" },
+  { value: "COR3", label: "Non cadre à carrière interrompue par du chômage" },
   {
-    id: "COR4",
+    value: "COR4",
     label: "Non cadre avec une interruption de carrière pour enfant"
   }
 ];
@@ -24,7 +27,8 @@ const SimpleForm = () => {
     initialValues: {
       naissance: result.naissance || 1984,
       debut: result.debut || 22,
-      carriere: result.carriere || "COR2"
+      carriere: result.carriere || "COR2",
+      remuneration: result.remuneration || 0
     },
     onSubmit: values => {
       setPending(true);
@@ -50,57 +54,48 @@ const SimpleForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="inputs row">
-        <label>
-          Année de naissance
-          <input
-            id="naissance"
-            name="naissance"
-            type="number"
-            min="1930"
-            max="2020"
-            step="1"
-            onChange={formik.handleChange}
-            value={formik.values.naissance}
-          />
-        </label>
-        <label>
-          Âge de début de carrière
-          <input
-            id="debut"
-            name="debut"
-            type="number"
-            min="12"
-            max="77"
-            step="1"
-            onChange={formik.handleChange}
-            value={formik.values.debut}
-          />
-        </label>
-      </div>
-      <div className="row">
-        <label>Carrière</label>
-        <div className="carrieres">
-          {carrieres.map(p => (
-            <div className="carriere" key={p.id}>
-              <label>
-                <input
-                  type="radio"
-                  onChange={formik.handleChange}
-                  value={formik.values.carriere}
-                  name="carriere"
-                  value={p.id}
-                  checked={formik.values.carriere === p.id}
-                />
-                {p.label}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="row submit">
-        <button type="submit" disabled={pending}>
-          Accéder au carnage
+      <Input
+        label="Année de naissance"
+        name="naissance"
+        type="number"
+        min="1930"
+        max="2020"
+        step="1"
+        onChange={formik.handleChange}
+        value={formik.values.naissance}
+      />
+      <Input
+        label="Âge de début de carrière"
+        name="debut"
+        type="number"
+        min="12"
+        max="77"
+        step="1"
+        onChange={formik.handleChange}
+        value={formik.values.debut}
+      />
+      <Input
+        label="Rémuneration mensuelle brute en 2019"
+        name="remuneration"
+        icon="euro"
+        typz="number"
+        min="1"
+        step="1"
+        width="250px"
+        onChange={formik.handleChange}
+        value={formik.values.remuneration}
+      />
+      <Select
+        name="carriere"
+        label="Carrière"
+        options={carrieres}
+        value={formik.values.carriere}
+        onChange={formik.handleChange}
+      />
+      <div className="row submit-wrapper">
+        <button className="submit" type="submit" disabled={pending}>
+          {!pending && 'Accéder au carnage'}
+          {pending && <FA name="spinner" spin={true} />}
         </button>
 
         {pending && timerMessage && <div>{timerMessage}</div>}
