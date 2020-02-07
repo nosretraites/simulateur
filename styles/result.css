@@ -82,6 +82,10 @@
   justify-content: center;
 }
 
+.social-buttons {
+  display: flex;
+}
+
 .social-icon-wrapper {
   padding: 5px;
   width: 50px;
@@ -101,12 +105,33 @@
 @media (max-width: 700px) {
   .results {
     display: block;
+    width: 100%;
   }
   .result {
     width: 100%;
-    border: solid #acb8ce 1px;
-    border-radius: 10px;
-    padding: 0.4em;
-    margin: 0.3em;
+    padding: 20px 0;
+  }
+
+  .label {
+    font-size: 1em;
+  }
+
+  .important {
+    font-size: 2em;
+  }
+
+  .social {
+    font-size: 1.3em;
+    flex-direction: column;
+  }
+
+  .social-buttons {
+    margin: 5px 0;
+    justify-content: center;
+  }
+
+  .social-icon-wrapper {
+    width: 30px;
+    height: 30px;
   }
 }

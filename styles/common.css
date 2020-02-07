@@ -68,10 +68,11 @@ header img {
   }
 
   header h2 {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 
   .phrase {
     font-size: 1em;
+    margin-bottom: 10px;
   }
 }

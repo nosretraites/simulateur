@@ -39,7 +39,7 @@ const Result = () => {
 
   return (
     <div>
-      <div className="row results">
+      <div className="results">
         <div className="result">
           <div>
             <span className="label">Une personne née en </span>
@@ -84,18 +84,20 @@ const Result = () => {
         <span className="text">
           Partagez les conséquences de la réforme des retraites :
         </span>
-        <FacebookShareButton
-          url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
-          quote={SHARE_TITLE}
-        >
-          <SocialIcon name="facebook" />
-        </FacebookShareButton>
-        <TwitterShareButton
-          url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
-          quote={SHARE_TITLE}
-        >
-          <SocialIcon name="twitter" />
-        </TwitterShareButton>
+        <div className="social-buttons">
+          <FacebookShareButton
+            url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
+            quote={SHARE_TITLE}
+          >
+            <SocialIcon name="facebook" />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url={BASE_SHARE_URL + '?' + new URLSearchParams(result)}
+            quote={SHARE_TITLE}
+          >
+            <SocialIcon name="twitter" />
+          </TwitterShareButton>
+        </div>
       </div>
     </div>
   );
