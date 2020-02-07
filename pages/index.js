@@ -22,7 +22,6 @@ const carrieres = [
   }
 ];
 
-
 const SimpleForm = () => {
   const { postSimpleForm, result, setResult } = useContext(Context);
   const [pending, setPending] = useState(false);
