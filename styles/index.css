@@ -196,7 +196,13 @@ input::-moz-focus-inner {
   .input-label {
     text-align: left;
     width: 100%;
+    font-size: 1.3em;
   }
+
+  .input input {
+    font-size: 1.5em;
+  }
+  
 
   .select-text, .select-bar {
     width: 100%;
