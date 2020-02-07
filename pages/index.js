@@ -78,9 +78,9 @@ const SimpleForm = () => {
         label="Rémuneration mensuelle brute en 2019"
         name="remuneration"
         icon="euro"
-        typz="number"
+        type="number"
         min="1"
-        step="1"
+        step="10"
         width="250px"
         onChange={formik.handleChange}
         value={formik.values.remuneration}
@@ -92,7 +92,7 @@ const SimpleForm = () => {
         value={formik.values.carriere}
         onChange={formik.handleChange}
       />
-      <div className="row submit-wrapper">
+      <div className="submit-wrapper">
         <button className="submit" type="submit" disabled={pending}>
           {!pending && 'Accéder au carnage'}
           {pending && <FA name="spinner" spin={true} />}

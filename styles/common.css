@@ -48,10 +48,6 @@ header img {
   margin-bottom: 50px;
 }
 
-.row {
-  margin: 0.5em;
-}
-
 @media (max-width: 700px) {
   body {
     max-width: 100%;
