@@ -47,12 +47,12 @@ async function postSimpleForm(values) {
 
 const Context = createContext({});
 
-const Provider = ({ children, router }) => {
-  const [result, setResult] = useState(router.query);
+const Provider = ({ children, initialState }) => {
+  const [result, setResult] = useState(initialState);
 
   useEffect(() => {
-    router.query && setResult(router.query);
-  }, [router.query])
+    initialState && setResult(initialState);
+  }, [initialState])
 
   return (
     <Context.Provider value={{
