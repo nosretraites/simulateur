@@ -1,0 +1,53 @@
+:root {
+  --primary-color: #1DDDA5;
+  --secondary-color: #FFB0B4;
+  --light-color: #545C6A;
+  --dark-color: #525E72;
+}
+
+body {
+  max-width: 75em;
+  margin: 0em auto;
+  font-family: Arial, Helvetica;
+}
+
+header {
+  margin: 0.5em;
+  display: flex;
+  flex-direction: row;
+}
+
+header > div {
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0;
+  font-size: 4em;
+  font-weight: bold;
+  color: var(--dark-color);
+}
+
+header h2 {
+  font-size: 4em;
+  font-weight: lighter;
+  margin: 0;
+  color: var(--light-color);
+}
+
+header img {
+  height: 200px;
+}
+
+.phrase {
+  font-size: 1.5em;
+  margin-bottom: 50px;
+}
+
+.row {
+  margin: 0.5em;
+}

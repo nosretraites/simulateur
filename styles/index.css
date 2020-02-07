@@ -1,0 +1,80 @@
+@import 'common.css';
+
+form {
+  font-size: 200%;
+}
+
+label {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.inputs label {
+  margin: 0.2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row.submit {
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+}
+.row.submit div {
+  margin: 0 1em;
+}
+
+.carrieres label {
+  color: #505d75;
+  font-size: 0.7em;
+  font-weight: normal;
+}
+
+label .carriere {
+  flex-direction: row;
+  font-size: 100%;
+}
+
+input {
+  font-size: 1em;
+  border: none;
+  text-align: center;
+  border-bottom: dashed #505d75 1px;
+  color: #505d75;
+}
+
+button {
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1em 3em;
+  font-weight: bold;
+  font-size: 0.6em;
+  border-radius: 5px;
+  align-self: center;
+  cursor: pointer;
+}
+
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+@media (max-width: 700px) {
+  .inputs {
+    flex-direction: column;
+  }
+}

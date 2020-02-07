@@ -1,0 +1,99 @@
+@import 'common.css';
+
+.results {
+  display: flex;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+}
+
+.results > div:nth-child(2) {
+  background-color: var(--secondary-color);
+}
+
+.result > div {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.result > p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.important {
+  font-size: 3.5em;
+  font-weight: bolder;
+  margin-left: 15px;
+  color: var(--dark-color);
+}
+
+.chart-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-wrapper .label {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.chart-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chart-col {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.chart-col span {
+  margin: 0;
+}
+
+.social {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 2em;
+  font-weight: bolder;
+  display: flex;
+}
+
+.social .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.social svg {
+  fill: var(--primary-color);
+}
+
+@media (max-width: 700px) {
+  .results {
+    display: block;
+  }
+  .result {
+    width: 100%;
+    border: solid #acb8ce 1px;
+    border-radius: 10px;
+    padding: 0.4em;
+    margin: 0.3em;
+  }
+}

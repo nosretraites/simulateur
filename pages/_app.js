@@ -1,8 +1,29 @@
 import App from "next/app";
-import { Provider } from "../context";
+import Head from 'next/head';
 
-const MyApp = (props) => (
-  <Provider>
+import { Provider } from "../components/context";
+
+import "../styles/index.css";
+import "../styles/result.css";
+
+const MyApp = props => (
+  <Provider router={props.router}>
+    <Head>
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+      {/* <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> */}
+    </Head>
+    <header>
+      <img src="logo_collectif.png" />
+      <div>
+        <h1>Réforme des retraites</h1>
+        <h2>Quel impact pour moi ?</h2>
+      </div>
+    </header>
+    <p className="phrase">
+      Avec le simulateur du <strong>collectif citoyen Nos retraites</strong>,
+      decouvrez l'impact qu'aurait la réforme des retraites de Macron sur votre
+      pension.
+    </p>
     <App {...props} />
   </Provider>
 );
