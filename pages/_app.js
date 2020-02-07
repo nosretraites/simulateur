@@ -9,8 +9,8 @@ import "../styles/result.css";
 const MyApp = props => (
   <Provider router={props.router}>
     <Head>
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" /> 
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-      {/* <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> */}
     </Head>
     <header>
       <img src="logo_collectif.png" />

@@ -8,7 +8,7 @@
 body {
   max-width: 75em;
   margin: 0em auto;
-  font-family: Arial, Helvetica;
+  font-family: 'Roboto', sans-serif, Helvetica;
 }
 
 header {
@@ -50,4 +50,28 @@ header img {
 
 .row {
   margin: 0.5em;
+}
+
+@media (max-width: 700px) {
+  body {
+    max-width: 100%;
+    padding: 5px;
+  }
+
+  header img {
+    height: 50px;
+  }
+
+  header h1 {
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+
+  header h2 {
+    font-size: 1.2em;
+  }
+
+  .phrase {
+    font-size: 1em;
+  }
 }
