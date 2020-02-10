@@ -25,15 +25,15 @@ async function postSimpleForm(values) {
     const rNaissance = parseInt(r.anaiss)
     if (rNaissance == 1960 && r.scenario == 'actuel') {
       age = rAge
-      past = Math.round(parseFloat(r.TR_brut)*100)
+      past = Math.round(parseFloat(r.TR_brut_neut)*100)
     }
 
     if (rAge == age && r.scenario == 'reforme') {
-      current = Math.round(parseFloat(r.TR_brut)*100)
+      current = Math.round(parseFloat(r.TR_brut_neut)*100)
     }
 
     if (current && !delay && r.scenario == 'reforme') {
-      let test = Math.round(parseFloat(r.TR_brut)*100)
+      let test = Math.round(parseFloat(r.TR_brut_neut)*100)
       if (test >= past) {
         delay = rAge - age
       }
