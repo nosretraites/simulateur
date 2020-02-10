@@ -90,6 +90,7 @@ header img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 2em;
 }
 
 .input, .select {
@@ -106,9 +107,9 @@ header img {
   background: 0;
   border: 0;
   outline: none;
-  width: 80vw;
+  width: 200px;
   max-width: 400px;
-  font-size: 1.5em;
+  font-size: 2.1em;
 }
 
 .input input:focus + .line:after {
@@ -268,7 +269,13 @@ input::-moz-focus-inner {
   .input-label {
     text-align: left;
     width: 100%;
+    font-size: 1.3em;
   }
+
+  .input input {
+    font-size: 1.5em;
+  }
+  
 
   .select-text, .select-bar {
     width: 100%;
