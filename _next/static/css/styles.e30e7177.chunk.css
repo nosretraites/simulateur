@@ -1,0 +1,429 @@
+:root {
+  --primary-color: #1DDDA5;
+  --secondary-color: #FFB0B4;
+  --light-color: #545C6A;
+  --dark-color: #525E72;
+}
+
+body {
+  max-width: 75em;
+  margin: 0em auto;
+  font-family: 'Roboto', sans-serif, Helvetica;
+}
+
+header {
+  margin: 0.5em;
+  display: flex;
+  flex-direction: row;
+}
+
+header > div {
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0;
+  font-size: 4em;
+  font-weight: bold;
+  color: var(--dark-color);
+}
+
+header h2 {
+  font-size: 4em;
+  font-weight: lighter;
+  margin: 0;
+  color: var(--light-color);
+}
+
+header img {
+  height: 200px;
+}
+
+.phrase {
+  font-size: 1.5em;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 700px) {
+  body {
+    max-width: 100%;
+    padding: 5px;
+  }
+
+  header img {
+    height: 50px;
+  }
+
+  header h1 {
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+
+  header h2 {
+    font-size: 1.1em;
+  }
+
+  .phrase {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+}
+
+/* form {
+  font-size: 200%;
+} */
+
+.input-wrapper {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.input-label {
+  text-align: right;
+  display: inline-block;
+  width: 50%;
+  color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2em;
+}
+
+.input, .select {
+  width: 50%;
+  margin-left: 30px;
+  position: relative;
+}
+
+.input {
+  width: 200px;
+}
+
+.input input {
+  background: 0;
+  border: 0;
+  outline: none;
+  width: 200px;
+  max-width: 400px;
+  font-size: 2.1em;
+}
+
+.input input:focus + .line:after {
+  transform: scaleX(1);
+}
+
+.input .line {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  bottom: -8px;
+  background: #bdc3c7;
+}
+
+.input .line:after {
+  content: " ";
+  position: absolute;
+  float: right;
+  width: 100%;
+  height: 3px;
+  
+  transform: scalex(0);
+  transition: transform 0.3s ease;
+  
+  background: #1abc9c;
+}
+
+.submit-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+}
+
+.submit-wrapper div {
+  margin: 0 1em;
+  text-align: center;
+}
+
+.submit {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1em 3em;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 5px;
+  align-self: center;
+  cursor: pointer;
+  width: 300px;
+}
+
+.submit, .submit:focus, .submit:active {
+  -moz-outline: 0;
+  outline: 0;
+  -moz-outline-style: none;
+  outline-style: none;
+  border: none;
+}
+
+/* https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
+}
+
+.select {
+	position: relative;
+	width: 350px;
+}
+
+.select-text {
+	position: relative;
+	background-color: transparent;
+	width: 350px;
+	padding: 10px 10px 10px 0;
+	font-size: 18px;
+	border-radius: 0;
+	border: none;
+	border-bottom: 3px solid rgba(0,0,0, 0.12);
+}
+
+.select-text:focus {
+	outline: none;
+	border-bottom: 3px solid rgba(0,0,0, 0);
+}
+
+.select .select-text {
+	appearance: none;
+	-webkit-appearance:none
+}
+
+.select:after {
+	position: absolute;
+	top: 18px;
+	right: 10px;
+
+  width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid rgba(0, 0, 0, 0.12);
+	pointer-events: none;
+}
+
+
+.select-bar {
+	position: relative;
+	display: block;
+	width: 350px;
+}
+
+.select-bar:before, .select-bar:after {
+	content: '';
+	height: 3px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: var(--primary-color);
+	transition: 0.2s ease all;
+}
+
+.select-bar:before {
+	left: 50%;
+}
+
+.select-bar:after {
+	right: 50%;
+}
+
+/* active state */
+.select-text:focus ~ .select-bar:before, .select-text:focus ~ .select-bar:after {
+	width: 50%;
+}
+
+@media (max-width: 700px) {
+  .input-wrapper {
+    flex-direction: column;
+  }
+
+  .input, .select {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .input-label {
+    text-align: left;
+    width: 100%;
+    font-size: 1.3em;
+  }
+
+  .input input {
+    font-size: 1.5em;
+  }
+  
+
+  .select-text, .select-bar {
+    width: 100%;
+    font-size: 0.7em;
+  }
+
+  .submit {
+    font-size: 1em;
+  }
+
+  .submit-wrapper {
+    margin-top: 30px;
+  }
+}
+
+.results {
+  display: flex;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 20px;
+}
+
+.results > div:nth-child(2) {
+  background-color: var(--secondary-color);
+}
+
+.result > div {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.result > p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--light-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.important {
+  font-size: 3.5em;
+  font-weight: bolder;
+  margin-left: 15px;
+  color: var(--dark-color);
+}
+
+.chart-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-wrapper .label {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.chart-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chart-col {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.chart-col span {
+  margin: 0;
+}
+
+.social {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 2em;
+  font-weight: bolder;
+  display: flex;
+  margin-top: 30px;
+}
+
+.social .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.social-buttons {
+  display: flex;
+}
+
+.social-icon-wrapper {
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.social-icon {
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .results {
+    display: block;
+    width: 100%;
+  }
+  .result {
+    width: 100%;
+    padding: 20px 0;
+  }
+
+  .label {
+    font-size: 1em;
+  }
+
+  .important {
+    font-size: 2em;
+  }
+
+  .social {
+    font-size: 1.3em;
+    flex-direction: column;
+  }
+
+  .social-buttons {
+    margin: 5px 0;
+    justify-content: center;
+  }
+
+  .social-icon-wrapper {
+    width: 30px;
+    height: 30px;
+  }
+}
+
