@@ -44,7 +44,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/home/charl/Hackathon-retraites/simulateur/components/context.js";
+var _jsxFileName = "/home/thomas/repos/retraites/simulateur/components/context.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -53,7 +53,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-var API_BASE = 'https://destinie.reformedesretraites.fr';
+var isProduction = false;
+var API_BASE = isProduction ? 'https://destinie.reformedesretraites.fr' : 'http://127.0.0.1:5000';
 
 function postSimpleForm(values) {
   var res, blob, raw, json, past, age, current, delay;
@@ -90,15 +91,15 @@ function postSimpleForm(values) {
 
             if (rNaissance == 1960 && r.scenario == 'actuel') {
               age = rAge;
-              past = Math.round(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_7___default()(r.TR_brut) * 100);
+              past = Math.round(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_7___default()(r.TR_brut_neut) * 100);
             }
 
             if (rAge == age && r.scenario == 'reforme') {
-              current = Math.round(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_7___default()(r.TR_brut) * 100);
+              current = Math.round(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_7___default()(r.TR_brut_neut) * 100);
             }
 
             if (current && !delay && r.scenario == 'reforme') {
-              var test = Math.round(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_7___default()(r.TR_brut) * 100);
+              var test = Math.round(_babel_runtime_corejs2_core_js_parse_float__WEBPACK_IMPORTED_MODULE_7___default()(r.TR_brut_neut) * 100);
 
               if (test >= past) {
                 delay = rAge - age;
@@ -142,7 +143,7 @@ var Provider = function Provider(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 57
     },
     __self: this
   }, children);
@@ -165,7 +166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _nivo_pie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @nivo/pie */ "./node_modules/@nivo/pie/dist/nivo-pie.esm.js");
 /* harmony import */ var _hooks_useIsMobile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hooks/useIsMobile */ "./hooks/useIsMobile.js");
-var _jsxFileName = "/home/charl/Hackathon-retraites/simulateur/components/pie.js";
+var _jsxFileName = "/home/thomas/repos/retraites/simulateur/components/pie.js";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -239,7 +240,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-fontawesome */ "./node_modules/react-fontawesome/lib/index.js");
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
 
-var _jsxFileName = "/home/charl/Hackathon-retraites/simulateur/components/socialIcon.js";
+var _jsxFileName = "/home/thomas/repos/retraites/simulateur/components/socialIcon.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
@@ -35306,19 +35307,19 @@ module.exports = lodash;
 
 /***/ "./node_modules/next/dist/build/polyfills/object-assign.js":
 /*!***********************************************************************************************************************!*\
-  !*** delegated ./node_modules/next/dist/build/polyfills/object-assign.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/next/dist/build/polyfills/object-assign.js from dll-reference dll_5f137288facb1107b491 ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/next/dist/build/polyfills/object-assign.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_5f137288facb1107b491 */ "dll-reference dll_5f137288facb1107b491"))("./node_modules/next/dist/build/polyfills/object-assign.js");
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresult&absolutePagePath=%2Fhome%2Fcharl%2FHackathon-retraites%2Fsimulateur%2Fpages%2Fresult.js!./":
-/*!*****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresult&absolutePagePath=%2Fhome%2Fcharl%2FHackathon-retraites%2Fsimulateur%2Fpages%2Fresult.js ***!
-  \*****************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresult&absolutePagePath=%2Fhome%2Fthomas%2Frepos%2Fretraites%2Fsimulateur%2Fpages%2Fresult.js!./":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresult&absolutePagePath=%2Fhome%2Fthomas%2Frepos%2Fretraites%2Fsimulateur%2Fpages%2Fresult.js ***!
+  \****************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36748,12 +36749,12 @@ process.umask = function() { return 0; };
 
 /***/ "./node_modules/prop-types/checkPropTypes.js":
 /*!*********************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_5f137288facb1107b491 ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/prop-types/checkPropTypes.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_5f137288facb1107b491 */ "dll-reference dll_5f137288facb1107b491"))("./node_modules/prop-types/checkPropTypes.js");
 
 /***/ }),
 
@@ -37388,12 +37389,12 @@ if (true) {
 
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*******************************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_5f137288facb1107b491 ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_5f137288facb1107b491 */ "dll-reference dll_5f137288facb1107b491"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
 
 /***/ }),
 
@@ -41866,12 +41867,12 @@ function objectToGetParams(object) {
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_5f137288facb1107b491 ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_5f137288facb1107b491 */ "dll-reference dll_5f137288facb1107b491"))("./node_modules/react/index.js");
 
 /***/ }),
 
@@ -76114,7 +76115,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_pie__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/pie */ "./components/pie.js");
 /* harmony import */ var _components_socialIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/socialIcon */ "./components/socialIcon.js");
 
-var _jsxFileName = "/home/charl/Hackathon-retraites/simulateur/pages/result.js";
+var _jsxFileName = "/home/thomas/repos/retraites/simulateur/pages/result.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
@@ -76132,40 +76133,44 @@ var Result = function Result() {
   var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_components_context__WEBPACK_IMPORTED_MODULE_4__["Context"]),
       result = _useContext.result;
 
+  var past = _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(result.past);
+
+  var current = _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(result.current);
+
   var data = [{
     id: "result",
     label: "result",
-    value: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(result.past)
+    value: current
   }, {
     id: "other",
     label: "other",
-    value: 100 - _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(result.past)
+    value: 100 - current
   }];
   var baseData = [{
     id: "result",
     label: "result",
-    value: 61
+    value: past
   }, {
     id: "other",
     label: "other",
-    value: 39
+    value: 100 - past
   }];
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 47
     },
     __self: this
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 48
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 49
     },
     __self: this
   }, SEO_TITLE), __jsx("meta", {
@@ -76173,7 +76178,7 @@ var Result = function Result() {
     content: "article",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 50
     },
     __self: this
   }), __jsx("meta", {
@@ -76181,7 +76186,7 @@ var Result = function Result() {
     content: SOCIAL_DESCRIPTION,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 51
     },
     __self: this
   }), __jsx("meta", {
@@ -76189,7 +76194,7 @@ var Result = function Result() {
     content: SOCIAL_IMAGE,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 52
     },
     __self: this
   }), __jsx("meta", {
@@ -76197,7 +76202,7 @@ var Result = function Result() {
     content: "summary",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 54
     },
     __self: this
   }), __jsx("meta", {
@@ -76205,75 +76210,75 @@ var Result = function Result() {
     content: SOCIAL_DESCRIPTION,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 55
     },
     __self: this
   })), __jsx("div", {
     className: "results",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 57
     },
     __self: this
   }, __jsx("div", {
     className: "result",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 58
     },
     __self: this
   }, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 59
     },
     __self: this
   }, __jsx("span", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 60
     },
     __self: this
   }, "Une personne n\xE9e en "), __jsx("span", {
     className: "important",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 61
     },
     __self: this
   }, "1960")), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 63
     },
     __self: this
   }, __jsx("span", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 64
     },
     __self: this
   }, "peut partir \xE0 la retraite \xE0 "), __jsx("span", {
     className: "important",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 65
     },
     __self: this
   }, "65 ans")), __jsx("div", {
     className: "chart-wrapper",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 67
     },
     __self: this
   }, __jsx("span", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 68
     },
     __self: this
   }, "sa pension repr\xE9sentera "), __jsx(_components_pie__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -76281,68 +76286,68 @@ var Result = function Result() {
     label: "de son dernier salaire",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 69
     },
     __self: this
   }))), __jsx("div", {
     className: "result",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 75
     },
     __self: this
   }, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 76
     },
     __self: this
   }, __jsx("span", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 77
     },
     __self: this
   }, "Vous \xEAtes n\xE9-e en "), __jsx("span", {
     className: "important",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 78
     },
     __self: this
   }, result.naissance)), __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 80
     },
     __self: this
   }, __jsx("span", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 81
     },
     __self: this
   }, "en partant \xE0 la retraite \xE0 "), __jsx("span", {
     className: "important",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 82
     },
     __self: this
   }, result.age, " ans")), __jsx("div", {
     className: "chart-wrapper",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 84
     },
     __self: this
   }, __jsx("span", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 83
+      lineNumber: 85
     },
     __self: this
   }, "votre pension repr\xE9sentera "), __jsx(_components_pie__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -76350,41 +76355,41 @@ var Result = function Result() {
     label: "de votre dernier salaire",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 86
     },
     __self: this
   })), __jsx("p", {
     className: "label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 91
     },
     __self: this
   }, "Pour partir \xE0 la retraite \xE0 taux plein ", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 92
     },
     __self: this
-  }), "il vous faudra travailler 3 ans de plus !"))), __jsx("div", {
+  }), "il vous faudra travailler ", result.delay, " ans de plus !"))), __jsx("div", {
     className: "social",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 96
+      lineNumber: 98
     },
     __self: this
   }, __jsx("span", {
     className: "text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 99
     },
     __self: this
   }, "Partagez les cons\xE9quences de la r\xE9forme des retraites :"), __jsx("div", {
     className: "social-buttons",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 100
+      lineNumber: 102
     },
     __self: this
   }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_2__["FacebookShareButton"], {
@@ -76392,14 +76397,14 @@ var Result = function Result() {
     quote: SOCIAL_TITLE,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 103
     },
     __self: this
   }, __jsx(_components_socialIcon__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "facebook",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 105
+      lineNumber: 107
     },
     __self: this
   })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_2__["TwitterShareButton"], {
@@ -76407,14 +76412,14 @@ var Result = function Result() {
     quote: SOCIAL_TITLE,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 107
+      lineNumber: 109
     },
     __self: this
   }, __jsx(_components_socialIcon__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "twitter",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 111
+      lineNumber: 113
     },
     __self: this
   })))));
@@ -76457,28 +76462,28 @@ var Result = function Result() {
 
 /***/ }),
 
-/***/ 8:
-/*!*********************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fresult&absolutePagePath=%2Fhome%2Fcharl%2FHackathon-retraites%2Fsimulateur%2Fpages%2Fresult.js ***!
-  \*********************************************************************************************************************************************/
+/***/ 7:
+/*!********************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fresult&absolutePagePath=%2Fhome%2Fthomas%2Frepos%2Fretraites%2Fsimulateur%2Fpages%2Fresult.js ***!
+  \********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fresult&absolutePagePath=%2Fhome%2Fcharl%2FHackathon-retraites%2Fsimulateur%2Fpages%2Fresult.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresult&absolutePagePath=%2Fhome%2Fcharl%2FHackathon-retraites%2Fsimulateur%2Fpages%2Fresult.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fresult&absolutePagePath=%2Fhome%2Fthomas%2Frepos%2Fretraites%2Fsimulateur%2Fpages%2Fresult.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresult&absolutePagePath=%2Fhome%2Fthomas%2Frepos%2Fretraites%2Fsimulateur%2Fpages%2Fresult.js!./");
 
 
 /***/ }),
 
-/***/ "dll-reference dll_ef0ff7c60362f24a921f":
+/***/ "dll-reference dll_5f137288facb1107b491":
 /*!*******************************************!*\
-  !*** external "dll_ef0ff7c60362f24a921f" ***!
+  !*** external "dll_5f137288facb1107b491" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_ef0ff7c60362f24a921f;
+module.exports = dll_5f137288facb1107b491;
 
 /***/ })
 
-},[[8,"static/runtime/webpack.js"]]]);
+},[[7,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=result.js.map
