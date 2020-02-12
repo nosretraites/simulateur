@@ -15,16 +15,18 @@ const SOCIAL_IMAGE = `${BASE_SOCIAL_URL}/logo_collectif.png`;
 const Result = () => {
   const { result } = useContext(Context);
 
+  const past = parseInt(result.past)
+  const current = parseInt(result.current)
   const data = [
     {
       id: "result",
       label: "result",
-      value: parseInt(result.past)
+      value: current
     },
     {
       id: "other",
       label: "other",
-      value: 100 - parseInt(result.past)
+      value: 100 - current
     }
   ];
 
@@ -32,12 +34,12 @@ const Result = () => {
     {
       id: "result",
       label: "result",
-      value: 61
+      value: past
     },
     {
       id: "other",
       label: "other",
-      value: 39
+      value: 100 - past
     }
   ];
 
@@ -88,11 +90,11 @@ const Result = () => {
           </div>
           <p className="label">
             Pour partir à la retraite à taux plein <br/>
-            il vous faudra travailler 3 ans de plus !
+            il vous faudra travailler {result.delay} ans de plus !
           </p>
         </div>
-       
       </div>
+
       <div className="social">
         <span className="text">
           Partagez les conséquences de la réforme des retraites :

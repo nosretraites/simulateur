@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import xlsx from 'xlsx';
 
-const API_BASE = 'https://destinie.reformedesretraites.fr';
+const isProduction = 'production' === process.env.NODE_ENV
+const API_BASE = isProduction ? 'https://destinie.reformedesretraites.fr' : 'http://127.0.0.1:5000'
 
 async function postSimpleForm(values) {
   const res = await fetch(`${API_BASE}/multi`, {
