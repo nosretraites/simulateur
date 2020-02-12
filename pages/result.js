@@ -62,7 +62,7 @@ const Result = () => {
           </div>
           <div>
             <span className="label">peut partir à la retraite à </span>
-            <span className="important">65 ans</span>
+            <span className="important">{result.age} ans</span>
           </div>
           <div className="chart-wrapper">
             <span className="label">sa pension représentera </span>
