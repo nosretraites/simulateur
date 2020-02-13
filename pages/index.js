@@ -5,14 +5,14 @@ import FA from 'react-fontawesome';
 import Head from "next/head";
 
 import usePrevious from '../hooks/usePrevious';
-import { Context } from "../components/context";
+import { Context, getCarrieres } from "../components/context";
 import Input from '../components/input';
 import Select from '../components/select';
 
 const SEO_DESCRIPTION = 'Un super simulateur de retraites';
 const SEO_TITLE = 'Simulateur de retraite';
 
-const carrieres = [
+const carrieresBase = [
   { value: "SMIC", label: "SMIC" },
   { value: "COR1", label: "Cadre à carrière sans interruption" },
   { value: "COR2", label: "Non cadre à carrière sans interruption" },
@@ -28,6 +28,7 @@ const SimpleForm = () => {
   const [pending, setPending] = useState(false);
   const [timerMessage, setTimerMessage] = useState(false);
   const previousResult = usePrevious(result);
+  const [carrieres, setCarrieres] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -57,6 +58,17 @@ const SimpleForm = () => {
         });
     }
   });
+
+  useEffect(() => {
+    getCarrieres()
+      .then(carrieres => {
+        carrieres.forEach(c => {
+          c.value = c.id
+          c.label = c.titre
+        })
+        setCarrieres(carrieres)
+      })
+  }, [])
 
   useEffect(() => {
     if (!!previousResult && !Object.keys(previousResult).length && Object.keys(result).length) {

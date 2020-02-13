@@ -44,6 +44,38 @@ async function postSimpleForm(values) {
   return { past, age, current, delay }
 };
 
+async function getCarrieres() {
+  const res = await fetch(`${API_BASE}/carrieres.xlsx`)
+  const blob = await res.arrayBuffer();
+
+  const raw = xlsx.read(new Uint8Array(blob), {type:"array"})
+
+  const sheets = ['meta', 'serie', 'debut']
+  const result = {}
+
+  const meta = xlsx.utils.sheet_to_json(raw.Sheets.meta)
+  const serie = xlsx.utils.sheet_to_json(raw.Sheets.serie)
+  const debut = xlsx.utils.sheet_to_json(raw.Sheets.debut)
+
+  meta.forEach(carriere => {
+    carriere.serie = serie.map(row => {
+      return {
+        age: row.age,
+        value: row[carriere.id]
+      }
+    })
+
+    carriere.debut = debut.map(row => {
+      return {
+        generation: row.generation,
+        value: row[carriere.id] || 0
+      }
+    })
+  })
+
+  return meta
+};
+
 const Context = createContext({});
 
 const Provider = ({ children, initialState }) => {
@@ -66,5 +98,6 @@ const Provider = ({ children, initialState }) => {
 
 export {
   Context,
-  Provider
+  Provider,
+  getCarrieres
 }
