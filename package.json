@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "NODE_ENV=production next build && NODE_ENV=production next export",
-    "deploy": "npm run build && npm run deploy:github",
-    "deploy:test": "npm run build && npm run deploy:github:test",
-    "deploy:github": "touch out/.nojekyll && gh-pages --dist out --dotfiles",
-    "deploy:github:test": "touch out/.nojekyll && gh-pages --dist out --dotfiles --repo git@github.com:nosretraites/simulateur-test.git",
+    "deploy:github": "gh-pages --dist github-pages --dotfiles",
     "start": "next start",
     "fix": "prettier --write 'pages/**/*.js'"
   },
