@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import Router from "next/router";
 import FA from 'react-fontawesome';
 import Head from "next/head";
+import { ResponsiveLine } from '@nivo/line'
+
 
 import usePrevious from '../hooks/usePrevious';
 import { Context, getCarrieres } from "../components/context";
@@ -12,16 +14,66 @@ import Select from '../components/select';
 const SEO_DESCRIPTION = 'Un super simulateur de retraites';
 const SEO_TITLE = 'Simulateur de retraite';
 
-const carrieresBase = [
-  { value: "SMIC", label: "SMIC" },
-  { value: "COR1", label: "Cadre à carrière sans interruption" },
-  { value: "COR2", label: "Non cadre à carrière sans interruption" },
-  { value: "COR3", label: "Non cadre à carrière interrompue par du chômage" },
-  {
-    value: "COR4",
-    label: "Non cadre avec une interruption de carrière pour enfant"
+const currentValues = {
+  SMIC: 1540 + 0*20381/12,
+  SMPT: 38183/12,
+}
+
+// make sure parent container have a defined height when using
+// responsive component, otherwise height will be 0 and
+// no chart will be rendered.
+// website examples showcase many properties,
+// you'll often use just a few of them.
+const MyResponsiveLine = ({ data /* see data tab */ }) => (
+    <ResponsiveLine
+        data={data}
+        margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
+        xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+        yScale={{ type: 'linear', min: 0, max: 3 }}
+        axisTop={null}
+        axisRight={null}
+        animate={false}
+        axisBottom={{
+            orient: 'bottom',
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Âge',
+            legendOffset: 36,
+            legendPosition: 'middle'
+        }}
+        axisLeft={{
+            orient: 'left',
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Valeur',
+            legendOffset: -40,
+            legendPosition: 'middle'
+        }}
+        colors={{ scheme: 'nivo' }}
+        pointSize={0}
+        pointColor={{ theme: 'background' }}
+        pointBorderWidth={2}
+        pointBorderColor={{ from: 'serieColor' }}
+        pointLabel="y"
+        pointLabelYOffset={-12}
+        useMesh={true}
+    />
+)
+
+const getCarriereData = (carriere) => {
+  const data = carriere.serie.map(p => {
+    return {
+      x: p.age,
+      y: p.value
+    }
+  })
+  return {
+    "id": "carriere",
+    "data": data.filter(r => 15 <= r.x && r.x <= 60)
   }
-];
+}
 
 const SimpleForm = () => {
   const { postSimpleForm, result, setResult } = useContext(Context);
@@ -29,13 +81,14 @@ const SimpleForm = () => {
   const [timerMessage, setTimerMessage] = useState(false);
   const previousResult = usePrevious(result);
   const [carrieres, setCarrieres] = useState([]);
+  const [data, setData] = useState([]);
 
   const formik = useFormik({
     initialValues: {
       naissance: result.naissance || 1984,
       debut: result.debut || 20,
       carriere: result.carriere || "COR2",
-      remuneration: result.remuneration || 100
+      remuneration: result.remuneration || 1540
     },
     onSubmit: values => {
       setPending(true);
@@ -125,6 +178,20 @@ const SimpleForm = () => {
         value={formik.values.carriere}
         onChange={formik.handleChange}
       />
+      {
+        carrieres.map(carriere => (
+          <fieldset>
+            <legend>{carriere.titre}</legend>
+            { (carriere.serie.length === 0 && <p>Pas de profil disponible.</p>) ||
+              (carriere.serie[0].value === 1 && (<p>Avec {formik.values.remuneration}&nbsp;€ par mois en 2020, nous allons utilisé une carrière stable à {Math.round(parseFloat(formik.values.remuneration)/currentValues[carriere.id]*10)/10} fois le {carriere.titre}.</p>)) || (
+                <div style={{ height: '20em'}}>
+                  <MyResponsiveLine data={[getCarriereData(carriere)]} />
+                </div>
+                )
+            }
+          </fieldset>
+          ))
+      }
       <div className="submit-wrapper">
         <button className="submit" type="submit" disabled={pending}>
           {!pending && 'Accéder au carnage'}

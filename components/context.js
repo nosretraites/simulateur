@@ -65,6 +65,8 @@ async function getCarrieres() {
       }
     })
 
+    carriere.serie = carriere.serie.filter(r => r.value !== NaN && r.value !== undefined)
+
     carriere.debut = debut.map(row => {
       return {
         generation: row.generation,
