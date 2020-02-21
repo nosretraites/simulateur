@@ -56,23 +56,26 @@ const Result = () => {
       </Head>
       <div className="results">
         <div className="result">
+          <div className="important">Situation actuelle</div>
           <div>
             <span className="label">Une personne née en </span>
             <span className="important">1960</span>
           </div>
           <div>
-            <span className="label">peut partir à la retraite à </span>
+            <span className="label">peut partir à la retraite à taux plein à </span>
             <span className="important">{result.age} ans</span>
           </div>
           <div className="chart-wrapper">
             <span className="label">sa pension représentera </span>
             <Pie
               data={baseData}
-              label="de son dernier salaire"
+              label="du dernier salaire"
             />
+            <span className="label">de sa carrière</span>
           </div>
         </div>
         <div className="result">
+          <div className="important">Réforme Macron</div>
           <div>
             <span className="label">Vous êtes né-e en </span>
             <span className="important">{result.naissance}</span>
@@ -89,7 +92,7 @@ const Result = () => {
             />
           </div>
           <p className="label">
-            Pour partir à la retraite à taux plein <br/>
+            Pour partir à la retraite avec le même niveau de pension,
             il vous faudra travailler {result.delay} ans de plus !
           </p>
         </div>
