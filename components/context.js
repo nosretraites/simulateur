@@ -8,8 +8,7 @@ async function postSimpleForm(values) {
   const res = await fetch(`${API_BASE}/multi`, {
     method: "POST",
     body: new URLSearchParams({
-      ...values,
-      proportion: 1
+      ...values
     }),
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"

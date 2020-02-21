@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import Router from "next/router";
 import FA from 'react-fontawesome';
 import Head from "next/head";
-import { ResponsiveLine } from '@nivo/line'
 
 
 import usePrevious from '../hooks/usePrevious';
@@ -19,61 +18,6 @@ const currentValues = {
   SMPT: 38183/12,
 }
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const MyResponsiveLine = ({ data /* see data tab */ }) => (
-    <ResponsiveLine
-        data={data}
-        margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
-        xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
-        yScale={{ type: 'linear', min: 0, max: 3 }}
-        axisTop={null}
-        axisRight={null}
-        animate={false}
-        axisBottom={{
-            orient: 'bottom',
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'Âge',
-            legendOffset: 36,
-            legendPosition: 'middle'
-        }}
-        axisLeft={{
-            orient: 'left',
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'Valeur',
-            legendOffset: -40,
-            legendPosition: 'middle'
-        }}
-        colors={{ scheme: 'nivo' }}
-        pointSize={0}
-        pointColor={{ theme: 'background' }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: 'serieColor' }}
-        pointLabel="y"
-        pointLabelYOffset={-12}
-        useMesh={true}
-    />
-)
-
-const getCarriereData = (carriere) => {
-  const data = carriere.serie.map(p => {
-    return {
-      x: p.age,
-      y: p.value
-    }
-  })
-  return {
-    "id": "carriere",
-    "data": data.filter(r => 15 <= r.x && r.x <= 60)
-  }
-}
 
 const SimpleForm = () => {
   const { postSimpleForm, result, setResult } = useContext(Context);
@@ -81,6 +25,8 @@ const SimpleForm = () => {
   const [timerMessage, setTimerMessage] = useState(false);
   const previousResult = usePrevious(result);
   const [carrieres, setCarrieres] = useState([]);
+  const [carriereMap, setCarriereMap] = useState({});
+
   const [data, setData] = useState([]);
 
   const formik = useFormik({
@@ -96,7 +42,13 @@ const SimpleForm = () => {
         "💣 tic. tac. tic. tac. (10 secondes environ pour le moment 😁)"
       );
 
-      postSimpleForm(values)
+      const salary = parseFloat(values.remuneration) || 1000.0
+      const proportion = salary / (currentValues[carriereMap[values.carriere].base] || salary)
+
+      postSimpleForm({
+          proportion,
+          ...values
+        })
         .then(data => {
           const state = {
             ...data,
@@ -120,6 +72,10 @@ const SimpleForm = () => {
           c.label = c.titre
         })
         setCarrieres(carrieres)
+        setCarriereMap(carrieres.reduce((accum, item) => {
+          accum[item.id] = item
+          return accum
+        }, {}))
       })
   }, [])
 
@@ -161,7 +117,7 @@ const SimpleForm = () => {
         value={formik.values.debut}
       />
       <Input
-        label="Rémuneration mensuelle brute en 2019"
+        label="Rémuneration mensuelle brute en 2020"
         name="remuneration"
         icon="euro"
         type="number"
@@ -177,23 +133,11 @@ const SimpleForm = () => {
         options={carrieres}
         value={formik.values.carriere}
         onChange={formik.handleChange}
+        formik={formik}
+        currentValues={currentValues}
       />
-      {
-        carrieres.map(carriere => (
-          <fieldset>
-            <legend>{carriere.titre}</legend>
-            { (carriere.serie.length === 0 && <p>Pas de profil disponible.</p>) ||
-              (carriere.serie[0].value === 1 && (<p>Avec {formik.values.remuneration}&nbsp;€ par mois en 2020, nous allons utilisé une carrière stable à {Math.round(parseFloat(formik.values.remuneration)/currentValues[carriere.id]*10)/10} fois le {carriere.titre}.</p>)) || (
-                <div style={{ height: '20em'}}>
-                  <MyResponsiveLine data={[getCarriereData(carriere)]} />
-                </div>
-                )
-            }
-          </fieldset>
-          ))
-      }
       <div className="submit-wrapper">
-        <button className="submit" type="submit" disabled={pending}>
+        <button className="button submit" type="submit" disabled={pending}>
           {!pending && 'Accéder au carnage'}
           {pending && <FA name="spinner" size="lg" spin={true} />}
         </button>
