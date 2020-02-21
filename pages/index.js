@@ -4,37 +4,37 @@ import Router from "next/router";
 import FA from 'react-fontawesome';
 import Head from "next/head";
 
+
 import usePrevious from '../hooks/usePrevious';
-import { Context } from "../components/context";
+import { Context, getCarrieres } from "../components/context";
 import Input from '../components/input';
 import Select from '../components/select';
 
 const SEO_DESCRIPTION = 'Un super simulateur de retraites';
 const SEO_TITLE = 'Simulateur de retraite';
 
-const carrieres = [
-  { value: "SMIC", label: "SMIC" },
-  { value: "COR1", label: "Cadre à carrière sans interruption" },
-  { value: "COR2", label: "Non cadre à carrière sans interruption" },
-  { value: "COR3", label: "Non cadre à carrière interrompue par du chômage" },
-  {
-    value: "COR4",
-    label: "Non cadre avec une interruption de carrière pour enfant"
-  }
-];
+const currentValues = {
+  SMIC: 1540 + 0*20381/12,
+  SMPT: 38183/12,
+}
+
 
 const SimpleForm = () => {
   const { postSimpleForm, result, setResult } = useContext(Context);
   const [pending, setPending] = useState(false);
   const [timerMessage, setTimerMessage] = useState(false);
   const previousResult = usePrevious(result);
+  const [carrieres, setCarrieres] = useState([]);
+  const [carriereMap, setCarriereMap] = useState({});
+
+  const [data, setData] = useState([]);
 
   const formik = useFormik({
     initialValues: {
       naissance: result.naissance || 1984,
       debut: result.debut || 20,
       carriere: result.carriere || "COR2",
-      remuneration: result.remuneration || 100
+      remuneration: result.remuneration || 1540
     },
     onSubmit: values => {
       setPending(true);
@@ -42,7 +42,13 @@ const SimpleForm = () => {
         "💣 tic. tac. tic. tac. (10 secondes environ pour le moment 😁)"
       );
 
-      postSimpleForm(values)
+      const salary = parseFloat(values.remuneration) || 1000.0
+      const proportion = salary / (currentValues[carriereMap[values.carriere].base] || salary)
+
+      postSimpleForm({
+          proportion,
+          ...values
+        })
         .then(data => {
           const state = {
             ...data,
@@ -57,6 +63,21 @@ const SimpleForm = () => {
         });
     }
   });
+
+  useEffect(() => {
+    getCarrieres()
+      .then(carrieres => {
+        carrieres.forEach(c => {
+          c.value = c.id
+          c.label = c.titre
+        })
+        setCarrieres(carrieres)
+        setCarriereMap(carrieres.reduce((accum, item) => {
+          accum[item.id] = item
+          return accum
+        }, {}))
+      })
+  }, [])
 
   useEffect(() => {
     if (!!previousResult && !Object.keys(previousResult).length && Object.keys(result).length) {
@@ -96,7 +117,7 @@ const SimpleForm = () => {
         value={formik.values.debut}
       />
       <Input
-        label="Rémuneration mensuelle brute en 2019"
+        label="Rémuneration mensuelle brute en 2020"
         name="remuneration"
         icon="euro"
         type="number"
@@ -112,9 +133,11 @@ const SimpleForm = () => {
         options={carrieres}
         value={formik.values.carriere}
         onChange={formik.handleChange}
+        formik={formik}
+        currentValues={currentValues}
       />
       <div className="submit-wrapper">
-        <button className="submit" type="submit" disabled={pending}>
+        <button className="button submit" type="submit" disabled={pending}>
           {!pending && 'Accéder au carnage'}
           {pending && <FA name="spinner" size="lg" spin={true} />}
         </button>
