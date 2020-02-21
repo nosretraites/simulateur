@@ -115,7 +115,7 @@ const SimpleForm = () => {
       />
       <div className="submit-wrapper">
         <button className="submit" type="submit" disabled={pending}>
-          {!pending && 'Accéder au carnage'}
+          {!pending && 'Calculer'}
           {pending && <FA name="spinner" size="lg" spin={true} />}
         </button>
 
